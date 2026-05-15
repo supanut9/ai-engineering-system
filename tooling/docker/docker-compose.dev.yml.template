@@ -1,0 +1,103 @@
+# docker-compose.dev.yml.template — generic development compose stack.
+# Rename to `docker-compose.dev.yml` (or `docker-compose.yml`) and fill in the
+# placeholder values marked with <ANGLE_BRACKETS>.
+#
+# Services included:
+#   app       — your application (source-mounted for live reload)
+#   postgres  — PostgreSQL 17
+#   redis     — Redis 7 (alpine)
+#
+# Usage:
+#   docker compose -f docker-compose.dev.yml up --build
+#
+# Prerequisites: Docker Engine >= 24 with the Compose v2 plugin.
+
+name: <APP_NAME>-dev
+
+services:
+  # -------------------------------------------------------------------------
+  # application
+  # -------------------------------------------------------------------------
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # For faster dev builds, target the builder stage if your Dockerfile
+      # has a multi-stage setup:
+      # target: builder
+    image: <APP_NAME>:dev
+    container_name: <APP_NAME>-app
+    restart: unless-stopped
+    ports:
+      - "<HOST_PORT>:<CONTAINER_PORT>"  # e.g. "8080:8080" for Go, "3000:3000" for Node
+    environment:
+      # Override with your application's environment variables.
+      APP_ENV: development
+      DATABASE_URL: "postgres://postgres:postgres@postgres:5432/<DB_NAME>?sslmode=disable"
+      REDIS_URL: "redis://redis:6379/0"
+      # Add more env vars as needed — keep secrets out of compose files.
+      # Use a .env file: docker compose --env-file .env.local -f docker-compose.dev.yml up
+    volumes:
+      # Source mount for live reload (remove for production).
+      - .:/app
+      # Prevent the container's node_modules / Go cache from being overwritten
+      # by the host mount (Node projects):
+      # - /app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - app-net
+
+  # -------------------------------------------------------------------------
+  # PostgreSQL 17
+  # -------------------------------------------------------------------------
+  postgres:
+    image: postgres:17-alpine
+    # verify latest patch: https://hub.docker.com/_/postgres/tags?name=17
+    container_name: <APP_NAME>-postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"  # expose to host for local GUI tools (psql, TablePlus, etc.)
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: <DB_NAME>
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      # Optional: seed SQL scripts run on first start.
+      # - ./scripts/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - app-net
+
+  # -------------------------------------------------------------------------
+  # Redis 7
+  # -------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    # verify latest patch: https://hub.docker.com/_/redis/tags?name=7
+    container_name: <APP_NAME>-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"  # expose to host for local inspection (redis-cli, RedisInsight)
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - app-net
+
+volumes:
+  postgres-data:
+
+networks:
+  app-net:
+    driver: bridge

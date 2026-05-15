@@ -1,0 +1,91 @@
+# .gitignore.common — universal patterns for any language/stack
+# Merge into your project's .gitignore or symlink this file.
+
+# --- OS-generated files -----------------------------------------------------
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encdata
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+*~
+
+# --- Editor / IDE -----------------------------------------------------------
+# JetBrains (IntelliJ, GoLand, PyCharm, WebStorm, etc.)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Vim / Neovim
+*.swp
+*.swo
+*.swn
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+Session.vim
+Sessionx.vim
+.netrwhist
+tags
+[._]*.un~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# --- Environment / secrets --------------------------------------------------
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+.env.staging
+*.secret
+secrets.json
+credentials.json
+
+# --- Logs -------------------------------------------------------------------
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- Temporary directories --------------------------------------------------
+tmp/
+temp/
+.tmp/
+scratch/
+
+# --- CI / tool caches -------------------------------------------------------
+.scannerwork/
+
+# --- Docker -----------------------------------------------------------------
+# Local override compose files (keep docker-compose.yml committed).
+docker-compose.override.yml

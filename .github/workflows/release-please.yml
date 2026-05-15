@@ -1,0 +1,23 @@
+# Action versions verified 2026-05-15. Renovate/Dependabot will keep them current.
+# googleapis/release-please-action is pinned below; Renovate will update the SHA.
+name: Release Please
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    name: Run release-please
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        # verify latest: https://github.com/googleapis/release-please-action/releases
+        with:
+          release-type: simple
+          package-name: ai-engineering-system
+          version-file: VERSION

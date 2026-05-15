@@ -1,0 +1,148 @@
+site_name: AI Engineering System
+site_description: Reusable AI software delivery system — workflow, standards, stacks, and bootstrap.
+site_url: https://supanut9.github.io/ai-engineering-system/  # update once published
+repo_url: https://github.com/supanut9/ai-engineering-system  # placeholder
+repo_name: supanut9/ai-engineering-system
+edit_uri: edit/main/
+
+# docs_dir is the standard `docs/` subdirectory. Most pages under it are thin
+# include-markdown stubs that pull canonical content from the source-of-truth
+# files at the repo root (workflow/, standards/, stacks/, etc.). This keeps each
+# document single-sourced; the stubs exist only to give mkdocs a file inside
+# docs_dir to render and to give us nav stability.
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - content.code.copy
+    - content.code.annotate
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+  - include-markdown
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Workflow:
+    - Overview: workflow/ai-workflow.md
+    - Agent protocol: workflow/agent-protocol.md
+    - Phase gates: workflow/phase-gates.md
+    - Subagent contract: workflow/subagent-contract.md
+    - Task lifecycle: workflow/task-lifecycle.md
+  - Standards:
+    - API: standards/api-standards.md
+    - Coding: standards/coding-standards.md
+    - Database: standards/database-standards.md
+    - Git workflow: standards/git-workflow.md
+    - Logging and observability: standards/logging-observability.md
+    - Security: standards/security-standards.md
+    - Testing: standards/testing-standards.md
+  - Stacks:
+    - Go: stacks/go.md
+    - NestJS: stacks/nestjs.md
+    - Next.js: stacks/nextjs.md
+    - PostgreSQL: stacks/postgres.md
+    - Redis: stacks/redis.md
+    - Docker: stacks/docker.md
+  - Architectures:
+    - Hexagonal: code-architectures/hexagonal-architecture.md
+    - Clean: code-architectures/clean-architecture.md
+    - Domain-driven design: code-architectures/domain-driven-design.md
+    - Layered: code-architectures/layered-architecture.md
+  - Templates:
+    - Project file conventions: project-files/core-project-files.md
+    - Doc templates: templates/docs/PRD.md
+  - Project templates:
+    - Go Gin Layered: project-templates/go/go-gin-layered.md
+    - Go Gin Clean: project-templates/go/go-gin-clean.md
+    - Go Gin Hexagonal: project-templates/go/go-gin-hexagonal.md
+    - NestJS Layered: project-templates/nestjs/nestjs-layered.md
+    - Next.js Default: project-templates/nextjs/nextjs-default.md
+  - Adapters:
+    - Claude Code: claude/CLAUDE.md
+    - Codex: codex/AGENTS.md
+  - Reference:
+    - init-project: reference/init-project.md
+    - sync-agent-files: reference/sync-agent-files.md
+    - verify-example: reference/verify-example.md
+    - selftest: reference/selftest.md
+    - doctor: reference/doctor.md
+  - Cookbook:
+    - Overview: cookbook.md
+    - Bootstrap Go-Gin-Hexagonal: cookbook/bootstrap-go-hexagonal.md
+    - Bootstrap a FastAPI Service: cookbook/bootstrap-a-fastapi-service.md
+    - Run the Hello-Todo Example: cookbook/run-the-hello-todo-example.md
+    - Add an ADR: cookbook/add-an-adr.md
+    - Write a Plan File: cookbook/write-a-plan-file.md
+    - Add a Custom Claude Skill: cookbook/add-a-custom-claude-skill.md
+    - Upgrade System Version: cookbook/upgrade-system-version.md
+    - Split Work into Parallel Lanes: cookbook/split-work-into-parallel-lanes.md
+  - Examples: examples.md
+  - Governance:
+    - Overview: governance.md
+    - Migrations:
+      - Overview: migrations/README.md
+      - 0.0 → 0.1: migrations/0.0-to-0.1.md
+  - Contributing: contributing.md
+  - Changelog: changelog.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/supanut9/ai-engineering-system
+  generator: false
+
+copyright: Copyright &copy; 2026 supanut.tan and contributors

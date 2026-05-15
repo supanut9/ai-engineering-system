@@ -1,0 +1,64 @@
+name: System gap
+description: Report that the system failed to handle a real-world need.
+title: "[gap] "
+labels: ["system-gap"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A system gap is different from a bug: the system worked as designed, but the design
+        did not cover a real situation you encountered. Use this template to help improve coverage.
+
+  - type: textarea
+    id: what-tried
+    attributes:
+      label: What were you trying to do?
+      description: Describe the real-world task or workflow phase you were working on.
+      placeholder: I was trying to bootstrap a FastAPI project using the system and ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: not-covered
+    attributes:
+      label: What did the system not cover?
+      description: Which part of the system was missing or insufficient?
+      placeholder: The system has no stack profile for FastAPI. The closest (go-gin-hexagonal) required ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: workaround
+    attributes:
+      label: What did you do instead?
+      description: Describe the workaround you used, if any.
+      placeholder: I manually created the files by copying from the NestJS template and ...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Phase affected
+      description: Which workflow phase were you in when the gap appeared?
+      options:
+        - intake
+        - requirements
+        - spec
+        - architecture
+        - planning
+        - implementation
+        - testing
+        - release
+        - maintenance
+        - cross-cutting
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: existing-gaps
+    attributes:
+      label: Existing gaps
+      options:
+        - label: I have searched existing issues and this gap has not been reported before.
+          required: true

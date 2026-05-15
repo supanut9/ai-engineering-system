@@ -1,0 +1,54 @@
+.PHONY: setup run test test-race test-integration lint lint-fix fmt build clean help
+
+# Project name comes from the parent dir
+NAME ?= $(shell basename $(CURDIR))
+BIN  ?= bin/$(NAME)
+PORT ?= 8080
+
+setup:
+	go mod tidy
+
+run:
+	go run ./cmd/api
+
+test:
+	go test ./...
+
+test-race:
+	go test -race ./...
+
+test-integration: build
+	@./$(BIN) & API_PID=$$!; \
+	sleep 1; \
+	curl -sf http://localhost:$(PORT)/healthz > /dev/null && echo "integration: healthz OK" || (kill $$API_PID; exit 1); \
+	kill $$API_PID
+
+lint:
+	gofmt -l . | tee /dev/stderr | (! read)
+	go vet ./...
+	golangci-lint run
+
+lint-fix:
+	gofmt -w .
+	golangci-lint run --fix
+
+fmt: lint-fix
+
+build:
+	go build -o $(BIN) ./cmd/api
+
+clean:
+	rm -rf bin/
+
+help:
+	@echo "Targets:"
+	@echo "  setup            go mod tidy"
+	@echo "  run              go run ./cmd/api"
+	@echo "  test             go test ./..."
+	@echo "  test-race        go test -race ./..."
+	@echo "  test-integration build, smoke healthz endpoint, kill server"
+	@echo "  lint             gofmt + go vet + golangci-lint"
+	@echo "  lint-fix         apply gofmt + golangci-lint --fix"
+	@echo "  fmt              alias for lint-fix"
+	@echo "  build            compile to $(BIN)"
+	@echo "  clean            remove bin/"

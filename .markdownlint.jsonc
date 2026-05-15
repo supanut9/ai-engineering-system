@@ -1,0 +1,27 @@
+// markdownlint config — tuned for this repo's docs. PRs welcome.
+{
+  // Extend the default ruleset.
+  "default": true,
+
+  // MD013 — line length: disabled (too restrictive for long prose and tables).
+  "MD013": false,
+
+  // MD024 — no-duplicate-heading: allow identical headings under different parents.
+  "MD024": {
+    "siblings_only": true
+  },
+
+  // MD025 — single-title: set front_matter_title to empty so YAML frontmatter
+  // titles do not conflict with the first ATX heading.
+  "MD025": {
+    "front_matter_title": ""
+  },
+
+  // MD033 — inline HTML: disabled (sometimes required for docs formatting).
+  "MD033": false,
+
+  // MD007 — unordered list indentation: 2 spaces.
+  "MD007": {
+    "indent": 2
+  }
+}

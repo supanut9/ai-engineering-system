@@ -1,0 +1,54 @@
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editors
+.idea/
+.vscode/
+*.iml
+
+# Python (for tooling self-tests + Python ecosystem)
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Node (used by tooling + skeletons during local verification)
+node_modules/
+dist/
+.next/
+coverage/
+*.tsbuildinfo
+
+# Go (used by examples + skeletons during local verification)
+bin/
+vendor/
+*.test
+*.out
+go.work
+go.work.sum
+
+# mkdocs build artifacts
+/site/
+
+# Selftest temporaries
+tmp/
+.tmp/
+aes-selftest.*
+
+# Env files (NEVER commit secrets; .env.example is fine)
+.env
+.env.local
+.env.*.local
+
+# Local agent state
+.claude/local/
+.codex/local/

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="720" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Clean Architecture concentric circles</title>
+  <desc id="desc">Concentric circles showing entities, use cases, interface adapters, and frameworks and drivers with dependencies pointing inward.</desc>
+  <rect width="960" height="720" fill="#faf7f2"/>
+  <circle cx="480" cy="360" r="250" fill="#f3dfb5" stroke="#2f2a24" stroke-width="2"/>
+  <circle cx="480" cy="360" r="190" fill="#f6e7c8" stroke="#2f2a24" stroke-width="2"/>
+  <circle cx="480" cy="360" r="130" fill="#fbf0dc" stroke="#2f2a24" stroke-width="2"/>
+  <circle cx="480" cy="360" r="70" fill="#fff8ea" stroke="#2f2a24" stroke-width="2"/>
+  <g font-family="Helvetica, Arial, sans-serif" fill="#1f1a14">
+    <text x="480" y="345" text-anchor="middle" font-size="28" font-weight="700">Entities</text>
+    <text x="480" y="377" text-anchor="middle" font-size="16">Enterprise Business Rules</text>
+
+    <text x="480" y="250" text-anchor="middle" font-size="26" font-weight="700">Use Cases</text>
+    <text x="480" y="278" text-anchor="middle" font-size="16">Application Business Rules</text>
+
+    <text x="480" y="140" text-anchor="middle" font-size="24" font-weight="700">Interface Adapters</text>
+    <text x="480" y="165" text-anchor="middle" font-size="15">Controllers</text>
+    <text x="480" y="186" text-anchor="middle" font-size="15">Presenters</text>
+    <text x="480" y="207" text-anchor="middle" font-size="15">Gateways</text>
+
+    <text x="480" y="70" text-anchor="middle" font-size="24" font-weight="700">Frameworks and Drivers</text>
+    <text x="480" y="95" text-anchor="middle" font-size="15">Web</text>
+    <text x="560" y="645" text-anchor="middle" font-size="15">Database</text>
+    <text x="330" y="645" text-anchor="middle" font-size="15">Devices</text>
+    <text x="165" y="370" text-anchor="middle" font-size="15">External Interfaces</text>
+  </g>
+
+  <g stroke="#1f1a14" stroke-width="2.5" fill="none" marker-end="url(#arrow)">
+    <path d="M780 150 C720 195, 665 220, 610 245"/>
+    <path d="M805 570 C735 520, 670 485, 600 445"/>
+    <path d="M160 150 C235 200, 300 235, 360 270"/>
+    <path d="M120 360 C205 360, 270 360, 335 360"/>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif" fill="#1f1a14">
+    <text x="800" y="140" font-size="16" font-weight="700">Dependency Rule</text>
+    <text x="800" y="163" font-size="14">Source code dependencies</text>
+    <text x="800" y="184" font-size="14">point only inward.</text>
+  </g>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1f1a14"/>
+    </marker>
+  </defs>
+</svg>

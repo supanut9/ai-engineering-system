@@ -1,0 +1,41 @@
+---
+name: {{SKILL_NAME}}
+description: {{ONE_LINE_DESCRIPTION_USED_BY_CLAUDE_TO_DECIDE_WHEN_TO_INVOKE}}
+---
+
+# {{Skill Title}}
+
+{{One paragraph: what this skill does and why it exists. Describe the domain problem it solves and the output it produces. Keep this under five sentences.}}
+
+## when to use
+
+- {{Prompt pattern or situation 1 that should trigger this skill}}
+- {{Prompt pattern or situation 2}}
+- {{Situation 3 — describe the user's intent, not the tool}}
+
+## what to produce
+
+{{Describe the concrete artifact(s) the skill must emit. Include file paths relative to the project root, naming conventions, and format. Example: "A Markdown file at `docs/architecture/ADR-{NNN}-{slug}.md` using the ADR template at `templates/docs/ADR.md`."}}
+
+## process
+
+1. {{Step 1 — imperative verb. What Claude does first.}}
+2. {{Step 2}}
+3. {{Step 3}}
+4. {{Step 4 — include as many ordered steps as needed; remove this placeholder if not needed}}
+
+## templates to reference
+
+- `{{relative/path/to/template.md}}` — {{what the template is and when to use it}}
+- `{{relative/path/to/another.md}}` — {{description}}
+
+## quality checks
+
+- {{Check 1 — a concrete, verifiable condition the output must satisfy before the skill is considered done}}
+- {{Check 2 — e.g., "All placeholder fields in the template have been replaced with real content"}}
+- {{Check 3 — e.g., "File is saved at the correct path and committed to the working branch"}}
+
+## anti-patterns
+
+- {{Mistake 1}} — {{why it is wrong and what to do instead}}
+- {{Mistake 2}} — {{why it is wrong and what to do instead}}

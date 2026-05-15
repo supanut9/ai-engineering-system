@@ -1,0 +1,62 @@
+version: 2
+updates:
+  # GitHub Actions — weekly, grouped minor+patch
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      github-actions-minor-patch:
+        update-types:
+          - minor
+          - patch
+
+  # Go modules for the hello-todo-go example
+  - package-ecosystem: gomod
+    directory: /examples/hello-todo-go
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      gomod-minor-patch:
+        update-types:
+          - minor
+          - patch
+
+  # npm for NestJS skeleton
+  - package-ecosystem: npm
+    directory: /templates/skeletons/nestjs-layered
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      npm-nestjs-minor-patch:
+        update-types:
+          - minor
+          - patch
+
+  # npm for Next.js skeleton
+  - package-ecosystem: npm
+    directory: /templates/skeletons/nextjs-default
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      npm-nextjs-minor-patch:
+        update-types:
+          - minor
+          - patch
+
+  # pip for MkDocs / docs dependencies
+  # Targets docs/requirements.txt if L9 ships one; gracefully no-ops if path does not exist.
+  - package-ecosystem: pip
+    directory: /docs
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      pip-docs-minor-patch:
+        update-types:
+          - minor
+          - patch

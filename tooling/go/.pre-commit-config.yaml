@@ -1,0 +1,38 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: \.md$
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ['--maxkb=500']
+
+  # golangci-lint pre-commit hook ships in the same repo as the linter itself.
+  # The hook id "golangci-lint" runs only on modified files (--new-from-rev HEAD);
+  # use "golangci-lint-full" in CI where full-repo analysis is required.
+  # Note: linters that require full-package context (e.g. unused) may miss
+  # findings with the default incremental hook.
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.11.4
+    hooks:
+      - id: golangci-lint
+        args: ['--fix']
+
+  - repo: local
+    hooks:
+      - id: go-mod-tidy
+        name: go mod tidy
+        entry: bash -c 'go mod tidy -diff'
+        language: system
+        types: [go]
+        pass_filenames: false
+      - id: go-test
+        name: go test (short)
+        entry: bash -c 'go test -short ./...'
+        language: system
+        types: [go]
+        pass_filenames: false
+        stages: [pre-push]   # only on push, not every commit

@@ -1,0 +1,54 @@
+# .gitattributes
+# Normalise line endings and control GitHub language statistics.
+
+# --- line endings -----------------------------------------------------------
+# Normalize all text files to LF in the repository and on checkout.
+* text=auto eol=lf
+
+# Shell scripts always LF.
+*.sh text eol=lf
+
+# Go source files always LF.
+*.go text eol=lf
+
+# Python source files always LF.
+*.py text eol=lf
+
+# TypeScript / JavaScript always LF.
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+
+# Rust source files always LF.
+*.rs text eol=lf
+
+# --- binary assets ----------------------------------------------------------
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary
+
+# --- GitHub language statistics --------------------------------------------
+# Mark generated / vendored directories so they don't skew language stats.
+vendor/**/* linguist-vendored
+node_modules/**/* linguist-vendored
+dist/**/* linguist-generated
+build/**/* linguist-generated
+.next/**/* linguist-generated
+__pycache__/**/* linguist-generated
+
+# Template / skeleton files — exclude from language stats.
+templates/skeletons/**/* linguist-vendored
+tooling/docker/*.template linguist-vendored
+
+# Example projects count toward language stats (real code, not vendored).
+examples/**/* linguist-vendored=false

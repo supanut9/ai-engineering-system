@@ -1,0 +1,54 @@
+name: Feature request
+description: Propose a new feature or improvement.
+title: "[feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What user problem does this solve?
+      description: Describe the problem or gap that motivates this request.
+      placeholder: As a user, I want ... so that ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe your preferred solution. Include any relevant design details.
+      placeholder: Add a flag `--foo` to `init-project.sh` that ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What other approaches did you consider and why did you rule them out?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of the system does this feature touch?
+      options:
+        - workflow
+        - stacks
+        - standards
+        - templates
+        - scripts
+        - docs
+        - cross-cutting
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: existing-issues
+    attributes:
+      label: Existing issues
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true

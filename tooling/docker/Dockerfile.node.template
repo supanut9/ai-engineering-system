@@ -1,0 +1,56 @@
+# Dockerfile.node.template — multi-stage Node.js / TypeScript build template.
+# Rename to `Dockerfile` and adjust the CMD for your entrypoint.
+#
+# Build: docker build -t my-service:latest .
+# Run:   docker run --rm -p 3000:3000 my-service:latest
+
+# ---------------------------------------------------------------------------
+# stage 1: dependencies + build
+# ---------------------------------------------------------------------------
+FROM node:22-alpine AS builder
+# verify latest patch: https://hub.docker.com/_/node/tags?name=22-alpine
+
+LABEL org.opencontainers.image.source="https://github.com/YOUR_ORG/YOUR_REPO"
+
+WORKDIR /app
+
+# Copy package files first for better layer caching.
+COPY package.json package-lock.json ./
+
+# Install all dependencies (including devDependencies needed for build).
+RUN npm ci
+
+# Copy the rest of the source.
+COPY . .
+
+# Build the project (compiles TypeScript, bundles assets, etc.).
+RUN npm run build
+
+# ---------------------------------------------------------------------------
+# stage 2: runtime
+# ---------------------------------------------------------------------------
+FROM node:22-alpine AS runtime
+# verify latest patch: https://hub.docker.com/_/node/tags?name=22-alpine
+
+LABEL org.opencontainers.image.source="https://github.com/YOUR_ORG/YOUR_REPO"
+
+WORKDIR /app
+
+# Copy package files and install only production dependencies.
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+
+# Copy built output from the builder stage.
+COPY --from=builder /app/dist ./dist
+
+# Run as a non-root user for better security posture.
+# node:22-alpine ships with uid=1000 "node" user.
+USER node
+
+EXPOSE 3000
+
+CMD ["node", "dist/main.js"]
+# Adjust the entrypoint for your framework:
+#   NestJS:    CMD ["node", "dist/main.js"]
+#   Fastify:   CMD ["node", "dist/server.js"]
+#   Express:   CMD ["node", "dist/app.js"]

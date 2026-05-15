@@ -1,0 +1,51 @@
+# python-ci.yml — GitHub Actions CI template for Python projects.
+# Copy this file to your project at .github/workflows/ci.yml and adjust as needed.
+# Uses uv for fast dependency installation.
+# Action versions verified 2026-05-15.
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  ci:
+    name: Lint, typecheck, and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        # verify latest: https://github.com/actions/checkout/releases
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        # verify latest: https://github.com/actions/setup-python/releases
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+        # Pin uv version for reproducibility if needed:
+        # curl -LsSf https://astral.sh/uv/0.11.14/install.sh | sh
+
+      - name: Install project and dev dependencies
+        run: uv pip install -e ".[dev]" --system
+
+      - name: Lint (ruff check)
+        run: ruff check .
+
+      - name: Format check (ruff format)
+        run: ruff format --check .
+
+      - name: Typecheck (mypy)
+        run: mypy .
+        # Add --ignore-missing-imports if third-party stubs are not installed.
+
+      - name: Test (pytest)
+        run: pytest
+        # Add coverage flags if needed:
+        # run: pytest --cov=src --cov-report=xml

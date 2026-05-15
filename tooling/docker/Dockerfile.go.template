@@ -1,0 +1,55 @@
+# Dockerfile.go.template — multi-stage Go build template.
+# Rename to `Dockerfile` and replace the APP_* build args with your project values.
+#
+# Build: docker build --build-arg APP_NAME=my-service -t my-service:latest .
+# Run:   docker run --rm -p 8080:8080 my-service:latest
+
+# ---------------------------------------------------------------------------
+# stage 1: builder
+# ---------------------------------------------------------------------------
+FROM golang:1.23-alpine AS builder
+# verify latest patch: https://hub.docker.com/_/golang/tags?name=1.23-alpine
+
+LABEL org.opencontainers.image.source="https://github.com/YOUR_ORG/YOUR_REPO"
+
+# Install CA certificates and git (needed if go get fetches private modules).
+RUN apk add --no-cache ca-certificates git
+
+WORKDIR /build
+
+# Copy dependency files first for better layer caching.
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
+
+# Copy the rest of the source.
+COPY . .
+
+# Build args — override at build time.
+ARG APP_NAME=app
+ARG TARGETOS=linux
+ARG TARGETARCH=amd64
+
+# Build a statically linked binary.
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} \
+    go build -trimpath -ldflags="-s -w" -o /build/out/${APP_NAME} ./cmd/${APP_NAME}
+
+# ---------------------------------------------------------------------------
+# stage 2: runtime
+# ---------------------------------------------------------------------------
+# distroless/static-debian12 includes CA certs and tzdata; use scratch if you
+# do not need either (saves ~2 MB) and are sure your app has no cert requirements.
+FROM gcr.io/distroless/static-debian12:nonroot AS runtime
+# verify latest digest: https://github.com/GoogleContainerTools/distroless/blob/main/base/README.md
+
+LABEL org.opencontainers.image.source="https://github.com/YOUR_ORG/YOUR_REPO"
+
+ARG APP_NAME=app
+
+# Copy the compiled binary from the builder stage.
+COPY --from=builder /build/out/${APP_NAME} /app
+
+# distroless/nonroot runs as UID 65532 by default — no USER instruction needed.
+
+EXPOSE 8080
+
+ENTRYPOINT ["/app"]

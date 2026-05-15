@@ -1,0 +1,47 @@
+version: "2"
+
+linters:
+  default: none
+  enable:
+    - errcheck      # unchecked errors
+    - govet
+    - ineffassign
+    - staticcheck   # supersedes several legacy linters in v2
+    - unused
+    - gosec         # security findings
+    - misspell
+    - revive        # replacement for golint
+    - gocritic      # opinionated style/perf checks
+    - bodyclose     # http.Response.Body.Close
+    - errorlint     # errors.Is/As correctness
+
+  settings:
+    revive:
+      rules:
+        - name: var-naming
+        - name: package-comments
+          disabled: true  # too noisy for small services
+        - name: exported
+          disabled: true  # noisy on internal packages
+    misspell:
+      locale: US
+    gocritic:
+      enabled-tags:
+        - performance
+        - diagnostic
+      disabled-checks:
+        - hugeParam     # often noisy
+        - rangeValCopy
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gosec     # tests legitimately do unusual things
+        - errcheck  # tests panic on err often
+  max-issues-per-linter: 0   # 0 = no limit
+  max-same-issues: 0
+
+run:
+  timeout: 5m
+  go: "1.23"

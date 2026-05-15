@@ -1,0 +1,42 @@
+# node-ci.yml — GitHub Actions CI template for Node.js / TypeScript projects.
+# Copy this file to your project at .github/workflows/ci.yml and adjust as needed.
+# Assumes the project uses npm. Switch `npm` to `pnpm` or `yarn` if needed.
+# Action versions verified 2026-05-15.
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  ci:
+    name: Lint, typecheck, test, and build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        # verify latest: https://github.com/actions/checkout/releases
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        # verify latest: https://github.com/actions/setup-node/releases
+        with:
+          node-version: "22.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build

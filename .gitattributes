@@ -1,0 +1,19 @@
+# Normalize line endings for all text files to LF on checkout.
+* text=auto eol=lf
+
+# Shell scripts always LF.
+*.sh text eol=lf
+
+# Go source files always LF.
+*.go text eol=lf
+
+# Binary assets — no line-ending normalization, no diff.
+*.png binary
+*.jpg binary
+*.svg binary
+
+# examples/ — count toward GitHub language statistics (not vendored).
+examples/**/* linguist-vendored=false
+
+# Skeleton templates — exclude from GitHub language statistics.
+templates/skeletons/**/* linguist-vendored

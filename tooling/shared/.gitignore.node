@@ -1,0 +1,48 @@
+# .gitignore.node — Node.js / TypeScript-specific ignore patterns
+# Merge into your project's .gitignore or symlink this file.
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+.next/
+.nuxt/
+.output/
+.svelte-kit/
+
+# Cache directories
+.cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+.stylelintcache
+tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# Test / coverage output
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+
+# Package manager lock files (keep one, ignore the rest)
+# Uncomment the lock files for package managers you do NOT use:
+# package-lock.json  (npm)
+# yarn.lock          (yarn)
+# pnpm-lock.yaml     (pnpm)
+
+# Storybook
+storybook-static/
+
+# Next.js / Vercel
+.vercel/
+
+# Nuxt
+.nuxt/
+.output/
+
+# Netlify
+.netlify/

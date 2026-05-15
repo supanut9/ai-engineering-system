@@ -1,0 +1,58 @@
+# go-ci.yml — GitHub Actions CI template for Go projects.
+# Copy this file to your project at .github/workflows/ci.yml and adjust as needed.
+# Action versions verified 2026-05-15. Pin SHAs via Renovate/Dependabot for supply-chain safety.
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  ci:
+    name: Build, lint, and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        # verify latest: https://github.com/actions/checkout/releases
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        # verify latest: https://github.com/actions/setup-go/releases
+        with:
+          go-version: "1.23.x"
+          cache: true
+
+      - name: Download modules
+        run: go mod download
+
+      - name: Verify modules
+        run: go mod verify
+
+      - name: go vet
+        run: go vet ./...
+
+      - name: gofmt check
+        # Exit non-zero if any files are not gofmt-formatted.
+        run: |
+          unformatted=$(gofmt -l .)
+          if [ -n "$unformatted" ]; then
+            echo "The following files are not gofmt-formatted:"
+            echo "$unformatted"
+            exit 1
+          fi
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        # verify latest: https://github.com/golangci/golangci-lint-action/releases
+        with:
+          version: "v2.11.4"
+          # Pass extra args if needed, e.g.: args: --timeout=5m
+
+      - name: Test (with race detector)
+        run: go test -race -coverprofile=coverage.out ./...
+
+      - name: Build
+        run: go build ./...

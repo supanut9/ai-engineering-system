@@ -1,0 +1,34 @@
+# Action versions verified 2026-05-15. Renovate/Dependabot will keep them current.
+# mkdocs.yml is owned by L9; if it does not yet exist the --strict build will fail
+# until L9 lands its file — that is expected and acceptable during the Wave 1 rollout.
+name: Docs
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  build-and-deploy:
+    name: Build (and deploy on main)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install MkDocs dependencies
+        run: pip install mkdocs-material==9.7.6 mkdocs-include-markdown-plugin
+
+      - name: Build docs (strict)
+        run: mkdocs build --strict
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: mkdocs gh-deploy --force --remote-branch gh-pages

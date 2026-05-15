@@ -1,0 +1,34 @@
+// next.config.mjs — minimal Next 16 configuration template
+// Copy to your project root and rename to next.config.mjs.
+// Uncomment lines as needed.
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Reserved for future experimental flags.
+  experimental: {},
+
+  // Uncomment to produce a self-contained Docker image:
+  // output: 'standalone',
+
+  // Uncomment to customise allowed remote image domains:
+  // images: {
+  //   remotePatterns: [
+  //     { protocol: 'https', hostname: 'example.com' },
+  //   ],
+  // },
+
+  // Uncomment to add security / CORS headers:
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/(.*)',
+  //       headers: [
+  //         { key: 'X-Frame-Options', value: 'DENY' },
+  //         { key: 'X-Content-Type-Options', value: 'nosniff' },
+  //       ],
+  //     },
+  //   ];
+  // },
+};
+
+export default nextConfig;

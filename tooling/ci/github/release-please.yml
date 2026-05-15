@@ -1,0 +1,44 @@
+# release-please.yml — GitHub Actions release automation template.
+# Copy this file to your project at .github/workflows/release-please.yml.
+#
+# release-type defaults to "simple" (reads/writes a plain VERSION file).
+# Switch to one of the following language-specific types as appropriate:
+#   go          — reads module version from go.mod, writes VERSION
+#   node        — reads/writes version in package.json
+#   python      — reads/writes version in setup.py or pyproject.toml
+#   rust        — reads/writes version in Cargo.toml
+#   java        — reads/writes pom.xml
+#   maven       — multi-module Maven
+#   helm        — Chart.yaml
+#
+# Action version verified 2026-05-15.
+# verify latest: https://github.com/googleapis/release-please-action/releases
+name: Release Please
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    name: Run release-please
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          # Change to the appropriate release type for your project.
+          release-type: simple
+
+          # For "simple" type: path to the file that holds the version string.
+          # Remove if using a language-specific release-type that finds it automatically.
+          version-file: VERSION
+
+          # Optional: set the package name for changelog headers.
+          # package-name: my-service
+
+          # Optional: customise changelog sections.
+          # changelog-types: '[{"type":"feat","section":"Features"},{"type":"fix","section":"Bug Fixes"},{"type":"chore","section":"Miscellaneous","hidden":true}]'

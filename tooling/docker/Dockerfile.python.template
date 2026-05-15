@@ -1,0 +1,63 @@
+# Dockerfile.python.template — multi-stage Python build template using uv.
+# Rename to `Dockerfile` and adjust the CMD for your entrypoint.
+#
+# Build: docker build -t my-service:latest .
+# Run:   docker run --rm -p 8000:8000 my-service:latest
+
+# ---------------------------------------------------------------------------
+# stage 1: build a virtual environment with uv
+# ---------------------------------------------------------------------------
+FROM python:3.12-slim AS builder
+# verify latest patch: https://hub.docker.com/_/python/tags?name=3.12-slim
+
+LABEL org.opencontainers.image.source="https://github.com/YOUR_ORG/YOUR_REPO"
+
+WORKDIR /app
+
+# Install uv (fast resolver/installer).
+# verify latest: https://github.com/astral-sh/uv/releases
+RUN pip install --no-cache-dir uv==0.11.14
+
+# Copy dependency declaration first for better layer caching.
+COPY pyproject.toml ./
+# If you use a uv.lock or requirements.txt, copy those too:
+# COPY uv.lock ./
+# COPY requirements.txt ./
+
+# Compile a self-contained venv at /app/.venv.
+RUN uv venv /app/.venv && \
+    uv pip install --python /app/.venv/bin/python --no-cache ".[prod]"
+# Use "." instead of ".[prod]" if you have no extras; change "prod" to match
+# your pyproject.toml optional-dependencies group name.
+
+# Copy the application source.
+COPY . .
+
+# ---------------------------------------------------------------------------
+# stage 2: runtime
+# ---------------------------------------------------------------------------
+FROM python:3.12-slim AS runtime
+# verify latest patch: https://hub.docker.com/_/python/tags?name=3.12-slim
+
+LABEL org.opencontainers.image.source="https://github.com/YOUR_ORG/YOUR_REPO"
+
+WORKDIR /app
+
+# Copy only the venv and application source — no build tools.
+COPY --from=builder /app/.venv /app/.venv
+COPY --from=builder /app/src ./src
+
+# Activate the venv by prepending it to PATH.
+ENV PATH="/app/.venv/bin:$PATH"
+
+# Run as a non-root user.
+RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+USER appuser
+
+EXPOSE 8000
+
+# Adjust the CMD for your ASGI/WSGI server and module path.
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# FastAPI / Starlette: CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Django (gunicorn):  CMD ["gunicorn", "myproject.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Flask (gunicorn):   CMD ["gunicorn", "app:app", "--bind", "0.0.0.0:8000"]

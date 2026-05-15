@@ -1,0 +1,43 @@
+target-version = "py312"
+line-length = 100
+extend-exclude = [
+  "build",
+  "dist",
+  ".venv",
+  "venv",
+  "__pycache__",
+  ".mypy_cache",
+  ".ruff_cache",
+  ".pytest_cache",
+]
+
+[lint]
+select = [
+  "E",   # pycodestyle errors
+  "F",   # pyflakes
+  "W",   # pycodestyle warnings
+  "I",   # isort
+  "B",   # bugbear
+  "UP",  # pyupgrade
+  "C4",  # comprehensions
+  "SIM", # simplify
+  "PT",  # pytest style
+  "RUF", # ruff-specific
+  "N",   # pep8-naming
+  "S",   # flake8-bandit (security)
+  "ARG", # unused arguments
+  "PL",  # pylint subset
+]
+ignore = [
+  "E501",    # line length — formatter handles
+  "PLR0913", # too many arguments — overly opinionated for handlers
+]
+
+[lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "ARG", "PLR2004"]  # asserts/unused-args/magic-numbers ok in tests
+"**/__init__.py" = ["F401"]                   # re-exports
+
+[format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"

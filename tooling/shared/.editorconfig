@@ -1,0 +1,36 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Go source files use tabs (gofmt enforces this).
+[*.go]
+indent_style = tab
+indent_size = 4
+
+# Makefiles require tabs.
+[Makefile]
+indent_style = tab
+
+# Python conventionally uses 4-space indentation.
+[*.py]
+indent_size = 4
+
+# Rust source files use 4-space indentation (rustfmt enforces this).
+[*.rs]
+indent_size = 4
+
+# Shell scripts — 2-space is fine; shellcheck is the real enforcer.
+[*.sh]
+indent_style = space
+indent_size = 2
+
+# YAML, TOML, JSON, Markdown — 2 spaces.
+[*.{yaml,yml,toml,json,jsonc,md}]
+indent_style = space
+indent_size = 2

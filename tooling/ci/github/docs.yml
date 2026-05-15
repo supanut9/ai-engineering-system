@@ -1,0 +1,57 @@
+# docs.yml — GitHub Actions mkdocs-material build and GitHub Pages deploy template.
+# Copy this file to your project at .github/workflows/docs.yml.
+#
+# Prerequisites:
+#   1. A mkdocs.yml at the project root configured for mkdocs-material.
+#   2. GitHub Pages enabled on the repository (Settings → Pages → Source: Deploy from branch,
+#      branch: gh-pages).
+#
+# On pull requests: builds only (validates the site; does not deploy).
+# On push to main: builds and deploys to the gh-pages branch.
+# Action versions verified 2026-05-15.
+name: Docs
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  build-and-deploy:
+    name: Build (and deploy on main)
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        # verify latest: https://github.com/actions/checkout/releases
+        with:
+          # Full history allows mkdocs-material's git-dates plugin to work.
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        # verify latest: https://github.com/actions/setup-python/releases
+        with:
+          python-version: "3.12"
+
+      - name: Install MkDocs dependencies
+        run: |
+          pip install \
+            mkdocs-material==9.7.6 \
+            mkdocs-include-markdown-plugin
+          # Add other MkDocs plugins your project uses, e.g.:
+          # mkdocs-git-revision-date-localized-plugin
+          # mkdocs-minify-plugin
+
+      - name: Build docs
+        # --strict turns warnings into errors (broken links, missing anchors).
+        # Remove --strict if the build is too noisy during early development.
+        run: mkdocs build --strict
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: mkdocs gh-deploy --force --remote-branch gh-pages

@@ -1,0 +1,3 @@
+# Stack Profile: PostgreSQL
+
+Placeholder.

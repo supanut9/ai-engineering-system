@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "{{PROJECT_NAME}}"
+version = "0.1.0"
+description = "TBD"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "TBD" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.15.13",
+  "mypy>=2.1.0",
+  "pytest>=9.0.3",
+  "pre-commit>=4.6.0",
+]
+
+[tool.hatch.build]
+include = ["src/**/*"]
+
+[tool.ruff]
+extend = "ruff.toml"  # delegate to the standalone ruff.toml
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_any_generics = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers --strict-config"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+markers = [
+  "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+  "integration: integration tests that hit external services",
+]
