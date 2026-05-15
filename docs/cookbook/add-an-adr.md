@@ -103,7 +103,7 @@ git log --oneline -1
 
 **Status left as `Proposed` when the decision is already made** — update `status:` to `Accepted` before committing if the team has already agreed. `Proposed` is for decisions still under discussion.
 
-**Commit message missing the ADR number** — the `[NNNN]` token in the commit message is what makes `git log --grep='\[000' ` work. Do not omit it.
+**Commit message missing the ADR number** — the `[NNNN]` token in the commit message is what makes `git log --grep='\[000'` work. Do not omit it.
 
 ## see also
 

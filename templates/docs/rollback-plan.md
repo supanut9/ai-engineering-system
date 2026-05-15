@@ -34,9 +34,9 @@ Steps mirror the deployment plan in reverse. Confirm with the deployment plan be
 
 | Concern | Action |
 |---|---|
-| Rows written since deploy | TBD  <!-- backfill | replay | discard | leave in place --> |
+| Rows written since deploy | TBD (backfill / replay / discard / leave in place) |
 | Messages / events in queue | TBD |
-| Irreversible migration steps | TBD  <!-- document what cannot be undone --> |
+| Irreversible migration steps | TBD (document what cannot be undone) |
 
 ## verification after rollback
 

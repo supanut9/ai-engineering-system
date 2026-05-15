@@ -9,7 +9,6 @@ Releases are managed automatically by [release-please](https://github.com/google
 
 ## [0.1.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.0.1...ai-engineering-system-v0.1.0) (2026-05-15)
 
-
 ### Features
 
 * **skills:** add dependency-review skill ([312ecbd](https://github.com/supanut9/ai-engineering-system/commit/312ecbd5fbe8aaf40a470894d89117d3e77fbbe5))
@@ -18,4 +17,4 @@ Releases are managed automatically by [release-please](https://github.com/google
 
 ### Added
 
-- _(placeholder — release-please will populate this on the next release PR)_
+* _(placeholder — release-please will populate this on the next release PR)_

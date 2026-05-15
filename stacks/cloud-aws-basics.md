@@ -102,8 +102,8 @@ See `../standards/logging-observability.md` for log format and tracing conventio
    Serverless v2 for workloads with variable or low sustained usage — it scales
    to near-zero when idle.
 4. **Lambda + long-running workers is the same pitfall as Vercel**: Lambda has a
-   15-minute maximum execution time and no persistent in-process state. Use SQS
-   + ECS/Fargate workers for queue consumers that need long or stateful
+   15-minute maximum execution time and no persistent in-process state. Use
+   SQS with ECS/Fargate workers for queue consumers that need long or stateful
    processing.
 5. **CloudFront is required for serious static asset delivery**: S3 alone is not
    a CDN. Requests go to a single region; latency is high for distant users.

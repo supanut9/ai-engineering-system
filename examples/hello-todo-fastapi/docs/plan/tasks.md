@@ -111,9 +111,9 @@ error-path test per endpoint
 **description:** Write `src/hello_todo_fastapi/main.py`. Creates the `FastAPI` app,
 instantiates `MemoryTodoRepository` and `TodoService`, stores them on `app.state`,
 includes the health and todos routers, and registers global exception handlers for
-`RequestValidationError` (→ 422 + validation_error envelope) and `TodoNotFoundError`
-(→ 404 + not_found envelope). A catch-all handler for unhandled exceptions returns 500
-+ internal envelope.
+`RequestValidationError` (→ 422 with the validation_error envelope) and `TodoNotFoundError`
+(→ 404 with the not_found envelope). A catch-all handler for unhandled exceptions
+returns 500 with the internal envelope.
 
 **depends on:** TODO-004
 

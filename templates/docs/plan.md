@@ -69,7 +69,7 @@ Phases run sequentially. Lanes within a wave run in parallel.
 
 ### phase 1 — {{TITLE}}
 
-**Wave 1**
+#### wave 1
 
 | Lane | Work |
 |---|---|
