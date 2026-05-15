@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "simple",
+  "packages": {
+    ".": {
+      "package-name": "ai-engineering-system",
+      "release-type": "simple",
+      "extra-files": [
+        "VERSION"
+      ],
+      "changelog-path": "CHANGELOG.md",
+      "draft": false,
+      "prerelease": false
+    }
+  },
+  "bootstrap-sha": "f77feb9cd5f6d5e94acf42551ac18611b34cd897"
+}

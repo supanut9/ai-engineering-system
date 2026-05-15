@@ -17,7 +17,8 @@ jobs:
     steps:
       - uses: googleapis/release-please-action@v4
         # verify latest: https://github.com/googleapis/release-please-action/releases
+        # Config + manifest live at the repo root so release-please reads the
+        # current version (0.0.1 baseline) and bumps semver from there.
         with:
-          release-type: simple
-          package-name: ai-engineering-system
-          version-file: VERSION
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
