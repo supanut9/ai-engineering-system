@@ -25,6 +25,18 @@
   // we do a prose-pass cleanup.
   "MD032": false,
 
+  // MD031 — blanks-around-fences: disabled for the same reason as MD032; the
+  // brief-style prose runs code fences inline with adjacent paragraphs.
+  "MD031": false,
+
+  // MD040 — fenced-code-language: disabled. Many fences are tree diagrams or
+  // raw output rather than a specific syntax; tagging them all is busywork.
+  "MD040": false,
+
+  // MD010 — no-hard-tabs: disabled. Makefiles legitimately use tabs and our
+  // prose includes Makefile snippets verbatim.
+  "MD010": false,
+
   // MD034 — no-bare-urls: allow bare URLs inside prose; they read fine in
   // GitHub-rendered markdown.
   "MD034": false,
