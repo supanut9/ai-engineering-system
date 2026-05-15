@@ -5,9 +5,6 @@
     ".": {
       "package-name": "ai-engineering-system",
       "release-type": "simple",
-      "extra-files": [
-        "VERSION"
-      ],
       "changelog-path": "CHANGELOG.md",
       "draft": false,
       "prerelease": false
