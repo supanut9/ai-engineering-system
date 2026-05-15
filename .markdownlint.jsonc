@@ -20,6 +20,21 @@
   // MD033 — inline HTML: disabled (sometimes required for docs formatting).
   "MD033": false,
 
+  // MD032 — blanks-around-lists: disabled. Existing workflow/* prose intentionally
+  // packs bullet lists tight against headings and inline paragraphs. Revisit when
+  // we do a prose-pass cleanup.
+  "MD032": false,
+
+  // MD034 — no-bare-urls: allow bare URLs inside prose; they read fine in
+  // GitHub-rendered markdown.
+  "MD034": false,
+
+  // MD041 — first-line-h1: docs/*.md files that are pure include-markdown stubs
+  // (e.g., docs/contributing.md, docs/changelog.md) don't have their own H1 because
+  // the included content already provides one. Disabling globally is the simplest
+  // and most maintainable choice.
+  "MD041": false,
+
   // MD007 — unordered list indentation: 2 spaces.
   "MD007": {
     "indent": 2

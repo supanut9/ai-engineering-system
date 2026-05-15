@@ -43,9 +43,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run actionlint
-        uses: rhysd/actionlint@v1
+        # actionlint is distributed as a Go binary; rhysd doesn't ship a
+        # standalone marketplace action. Use the reviewdog wrapper which
+        # downloads the binary and runs it.
+        uses: reviewdog/action-actionlint@v1
         with:
-          fail-on-error: true
+          fail_on_error: true
+          reporter: github-check
 
   verify-example:
     name: Verify example project
