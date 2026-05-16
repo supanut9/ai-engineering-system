@@ -488,9 +488,11 @@ _copy_tooling_for_stack() {
       _copy_dir_contents "${TOOLING_SRC}/python" "${TARGET_DIR}"
       ;;
     react-native-*)
-      # Mobile projects share the Node base. Framework-specific configs (eslint-config-expo,
-      # jest-expo) already live inside the skeleton's package.json.
+      # Mobile uses the Node tooling base for commitlint / lint-staged, then
+      # overlays Expo-specific ESLint rules. The overlay overwrites the shared
+      # eslint.config.mjs with eslint-config-expo's flat config.
       _copy_dir_contents "${TOOLING_SRC}/nodejs" "${TARGET_DIR}"
+      _copy_dir_contents "${TOOLING_SRC}/react-native" "${TARGET_DIR}"
       ;;
     *)
       warn "  No tooling profile for stack '${ARG_STACK}' — skipping"
