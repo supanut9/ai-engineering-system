@@ -10,31 +10,31 @@
       
       
       
-        <link rel="canonical" href="https://supanut9.github.io/ai-engineering-system/cookbook/bootstrap-a-fastapi-service/">
+        <link rel="canonical" href="https://supanut9.github.io/ai-engineering-system/project-templates/rust/axum-hexagonal/">
       
       
-        <link rel="prev" href="../bootstrap-go-hexagonal/">
+        <link rel="prev" href="../../multi-service/api-and-web/">
       
       
-        <link rel="next" href="../run-the-hello-todo-example/">
+        <link rel="next" href="../../../claude/CLAUDE/">
       
       
         
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Bootstrap a FastAPI Service - AI Engineering System</title>
+        <title>Rust Axum Hexagonal - AI Engineering System</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,7 +53,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#bootstrap-a-fastapi-service" class="md-skip">
+        <a href="#rust-axum-hexagonal" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="AI Engineering System" class="md-header__button md-logo" aria-label="AI Engineering System" data-md-component="logo">
+    <a href="../../.." title="AI Engineering System" class="md-header__button md-logo" aria-label="AI Engineering System" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Bootstrap a FastAPI Service
+              Rust Axum Hexagonal
             
           </span>
         </div>
@@ -225,7 +225,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
   
@@ -244,7 +244,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../quickstart/" class="md-tabs__link">
+      <a href="../../../quickstart/" class="md-tabs__link">
         
   
   
@@ -265,7 +265,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../workflow/ai-workflow/" class="md-tabs__link">
+        <a href="../../../workflow/ai-workflow/" class="md-tabs__link">
           
   
   
@@ -287,7 +287,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../standards/api-standards/" class="md-tabs__link">
+        <a href="../../../standards/api-standards/" class="md-tabs__link">
           
   
   
@@ -309,7 +309,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../stacks/go/" class="md-tabs__link">
+        <a href="../../../stacks/go/" class="md-tabs__link">
           
   
   
@@ -331,7 +331,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../code-architectures/hexagonal-architecture/" class="md-tabs__link">
+        <a href="../../../code-architectures/hexagonal-architecture/" class="md-tabs__link">
           
   
   
@@ -353,7 +353,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../project-files/core-project-files/" class="md-tabs__link">
+        <a href="../../../project-files/core-project-files/" class="md-tabs__link">
           
   
   
@@ -371,11 +371,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../project-templates/go/go-gin-layered/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../go/go-gin-layered/" class="md-tabs__link">
           
   
   
@@ -397,7 +399,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../claude/CLAUDE/" class="md-tabs__link">
+        <a href="../../../claude/CLAUDE/" class="md-tabs__link">
           
   
   
@@ -419,7 +421,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../reference/init-project/" class="md-tabs__link">
+        <a href="../../../reference/init-project/" class="md-tabs__link">
           
   
   
@@ -437,13 +439,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../cookbook/" class="md-tabs__link">
           
   
   
@@ -463,7 +463,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../examples/" class="md-tabs__link">
+      <a href="../../../examples/" class="md-tabs__link">
         
   
   
@@ -484,7 +484,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../governance/" class="md-tabs__link">
+        <a href="../../../governance/" class="md-tabs__link">
           
   
   
@@ -504,7 +504,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../contributing/" class="md-tabs__link">
+      <a href="../../../contributing/" class="md-tabs__link">
         
   
   
@@ -523,7 +523,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../changelog/" class="md-tabs__link">
+      <a href="../../../changelog/" class="md-tabs__link">
         
   
   
@@ -558,7 +558,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="AI Engineering System" class="md-nav__button md-logo" aria-label="AI Engineering System" data-md-component="logo">
+    <a href="../../.." title="AI Engineering System" class="md-nav__button md-logo" aria-label="AI Engineering System" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -588,7 +588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -615,7 +615,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../quickstart/" class="md-nav__link">
+      <a href="../../../quickstart/" class="md-nav__link">
         
   
   
@@ -706,7 +706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflow/ai-workflow/" class="md-nav__link">
+      <a href="../../../workflow/ai-workflow/" class="md-nav__link">
         
   
   
@@ -734,7 +734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflow/agent-protocol/" class="md-nav__link">
+      <a href="../../../workflow/agent-protocol/" class="md-nav__link">
         
   
   
@@ -762,7 +762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflow/phase-gates/" class="md-nav__link">
+      <a href="../../../workflow/phase-gates/" class="md-nav__link">
         
   
   
@@ -790,7 +790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflow/subagent-contract/" class="md-nav__link">
+      <a href="../../../workflow/subagent-contract/" class="md-nav__link">
         
   
   
@@ -818,7 +818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflow/task-lifecycle/" class="md-nav__link">
+      <a href="../../../workflow/task-lifecycle/" class="md-nav__link">
         
   
   
@@ -921,7 +921,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../standards/api-standards/" class="md-nav__link">
+      <a href="../../../standards/api-standards/" class="md-nav__link">
         
   
   
@@ -949,7 +949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../standards/coding-standards/" class="md-nav__link">
+      <a href="../../../standards/coding-standards/" class="md-nav__link">
         
   
   
@@ -977,7 +977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../standards/database-standards/" class="md-nav__link">
+      <a href="../../../standards/database-standards/" class="md-nav__link">
         
   
   
@@ -1005,7 +1005,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../standards/git-workflow/" class="md-nav__link">
+      <a href="../../../standards/git-workflow/" class="md-nav__link">
         
   
   
@@ -1033,7 +1033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../standards/logging-observability/" class="md-nav__link">
+      <a href="../../../standards/logging-observability/" class="md-nav__link">
         
   
   
@@ -1061,7 +1061,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../standards/security-standards/" class="md-nav__link">
+      <a href="../../../standards/security-standards/" class="md-nav__link">
         
   
   
@@ -1089,7 +1089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../standards/testing-standards/" class="md-nav__link">
+      <a href="../../../standards/testing-standards/" class="md-nav__link">
         
   
   
@@ -1194,7 +1194,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/go/" class="md-nav__link">
+      <a href="../../../stacks/go/" class="md-nav__link">
         
   
   
@@ -1222,7 +1222,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/nestjs/" class="md-nav__link">
+      <a href="../../../stacks/nestjs/" class="md-nav__link">
         
   
   
@@ -1250,7 +1250,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/nextjs/" class="md-nav__link">
+      <a href="../../../stacks/nextjs/" class="md-nav__link">
         
   
   
@@ -1278,7 +1278,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/rust/" class="md-nav__link">
+      <a href="../../../stacks/rust/" class="md-nav__link">
         
   
   
@@ -1306,7 +1306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/axum/" class="md-nav__link">
+      <a href="../../../stacks/axum/" class="md-nav__link">
         
   
   
@@ -1334,7 +1334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/postgres/" class="md-nav__link">
+      <a href="../../../stacks/postgres/" class="md-nav__link">
         
   
   
@@ -1362,7 +1362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/redis/" class="md-nav__link">
+      <a href="../../../stacks/redis/" class="md-nav__link">
         
   
   
@@ -1390,7 +1390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/docker/" class="md-nav__link">
+      <a href="../../../stacks/docker/" class="md-nav__link">
         
   
   
@@ -1487,7 +1487,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-architectures/hexagonal-architecture/" class="md-nav__link">
+      <a href="../../../code-architectures/hexagonal-architecture/" class="md-nav__link">
         
   
   
@@ -1515,7 +1515,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-architectures/clean-architecture/" class="md-nav__link">
+      <a href="../../../code-architectures/clean-architecture/" class="md-nav__link">
         
   
   
@@ -1543,7 +1543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-architectures/domain-driven-design/" class="md-nav__link">
+      <a href="../../../code-architectures/domain-driven-design/" class="md-nav__link">
         
   
   
@@ -1571,7 +1571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../code-architectures/layered-architecture/" class="md-nav__link">
+      <a href="../../../code-architectures/layered-architecture/" class="md-nav__link">
         
   
   
@@ -1664,7 +1664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../project-files/core-project-files/" class="md-nav__link">
+      <a href="../../../project-files/core-project-files/" class="md-nav__link">
         
   
   
@@ -1692,7 +1692,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../templates/docs/PRD/" class="md-nav__link">
+      <a href="../../../templates/docs/PRD/" class="md-nav__link">
         
   
   
@@ -1724,8 +1724,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -1747,19 +1749,22 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
         
           
-          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
             
   
   
@@ -1777,7 +1782,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_8">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1795,7 +1800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../project-templates/go/go-gin-layered/" class="md-nav__link">
+      <a href="../../go/go-gin-layered/" class="md-nav__link">
         
   
   
@@ -1823,7 +1828,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../project-templates/go/go-gin-clean/" class="md-nav__link">
+      <a href="../../go/go-gin-clean/" class="md-nav__link">
         
   
   
@@ -1851,7 +1856,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../project-templates/go/go-gin-hexagonal/" class="md-nav__link">
+      <a href="../../go/go-gin-hexagonal/" class="md-nav__link">
         
   
   
@@ -1879,7 +1884,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../project-templates/nestjs/nestjs-layered/" class="md-nav__link">
+      <a href="../../nestjs/nestjs-layered/" class="md-nav__link">
         
   
   
@@ -1907,7 +1912,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../project-templates/nextjs/nextjs-default/" class="md-nav__link">
+      <a href="../../nextjs/nextjs-default/" class="md-nav__link">
         
   
   
@@ -1935,7 +1940,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../project-templates/multi-service/api-and-web/" class="md-nav__link">
+      <a href="../../multi-service/api-and-web/" class="md-nav__link">
         
   
   
@@ -1960,10 +1965,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../project-templates/rust/axum-hexagonal/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rust Axum Hexagonal
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1979,6 +2011,114 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#use-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use When
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stack
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bootstrap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootstrap
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#folder-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Folder Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#folder-responsibilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Folder Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-workflow-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Workflow Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2056,7 +2196,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../claude/CLAUDE/" class="md-nav__link">
+      <a href="../../../claude/CLAUDE/" class="md-nav__link">
         
   
   
@@ -2084,7 +2224,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../codex/AGENTS/" class="md-nav__link">
+      <a href="../../../codex/AGENTS/" class="md-nav__link">
         
   
   
@@ -2183,7 +2323,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/init-project/" class="md-nav__link">
+      <a href="../../../reference/init-project/" class="md-nav__link">
         
   
   
@@ -2211,7 +2351,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/sync-agent-files/" class="md-nav__link">
+      <a href="../../../reference/sync-agent-files/" class="md-nav__link">
         
   
   
@@ -2239,7 +2379,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/verify-example/" class="md-nav__link">
+      <a href="../../../reference/verify-example/" class="md-nav__link">
         
   
   
@@ -2267,7 +2407,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/selftest/" class="md-nav__link">
+      <a href="../../../reference/selftest/" class="md-nav__link">
         
   
   
@@ -2295,7 +2435,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reference/doctor/" class="md-nav__link">
+      <a href="../../../reference/doctor/" class="md-nav__link">
         
   
   
@@ -2327,10 +2467,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -2362,22 +2500,19 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
             
   
   
@@ -2395,7 +2530,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2413,7 +2548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../../cookbook/" class="md-nav__link">
         
   
   
@@ -2441,7 +2576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bootstrap-go-hexagonal/" class="md-nav__link">
+      <a href="../../../cookbook/bootstrap-go-hexagonal/" class="md-nav__link">
         
   
   
@@ -2466,37 +2601,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Bootstrap a FastAPI Service
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../cookbook/bootstrap-a-fastapi-service/" class="md-nav__link">
         
   
   
@@ -2512,92 +2620,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        goal
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        prerequisites
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        steps
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verification" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        verification
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        common issues
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        see also
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2610,7 +2632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../run-the-hello-todo-example/" class="md-nav__link">
+      <a href="../../../cookbook/run-the-hello-todo-example/" class="md-nav__link">
         
   
   
@@ -2638,7 +2660,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../add-an-adr/" class="md-nav__link">
+      <a href="../../../cookbook/add-an-adr/" class="md-nav__link">
         
   
   
@@ -2666,7 +2688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../write-a-plan-file/" class="md-nav__link">
+      <a href="../../../cookbook/write-a-plan-file/" class="md-nav__link">
         
   
   
@@ -2694,7 +2716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../add-a-custom-claude-skill/" class="md-nav__link">
+      <a href="../../../cookbook/add-a-custom-claude-skill/" class="md-nav__link">
         
   
   
@@ -2722,7 +2744,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../drive-the-workflow/" class="md-nav__link">
+      <a href="../../../cookbook/drive-the-workflow/" class="md-nav__link">
         
   
   
@@ -2750,7 +2772,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../use-the-npm-wrapper/" class="md-nav__link">
+      <a href="../../../cookbook/use-the-npm-wrapper/" class="md-nav__link">
         
   
   
@@ -2778,7 +2800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bootstrap-multi-service/" class="md-nav__link">
+      <a href="../../../cookbook/bootstrap-multi-service/" class="md-nav__link">
         
   
   
@@ -2806,7 +2828,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../upgrade-system-version/" class="md-nav__link">
+      <a href="../../../cookbook/upgrade-system-version/" class="md-nav__link">
         
   
   
@@ -2834,7 +2856,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../split-work-into-parallel-lanes/" class="md-nav__link">
+      <a href="../../../cookbook/split-work-into-parallel-lanes/" class="md-nav__link">
         
   
   
@@ -2869,7 +2891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../examples/" class="md-nav__link">
+      <a href="../../../examples/" class="md-nav__link">
         
   
   
@@ -2954,7 +2976,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../governance/" class="md-nav__link">
+      <a href="../../../governance/" class="md-nav__link">
         
   
   
@@ -3007,7 +3029,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../migrations/" class="md-nav__link ">
+            <a href="../../../migrations/" class="md-nav__link ">
               
   
   
@@ -3051,7 +3073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migrations/0.0-to-0.1/" class="md-nav__link">
+      <a href="../../../migrations/0.0-to-0.1/" class="md-nav__link">
         
   
   
@@ -3094,7 +3116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../contributing/" class="md-nav__link">
+      <a href="../../../contributing/" class="md-nav__link">
         
   
   
@@ -3121,7 +3143,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../changelog/" class="md-nav__link">
+      <a href="../../../changelog/" class="md-nav__link">
         
   
   
@@ -3168,10 +3190,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
+  <a href="#use-when" class="md-nav__link">
     <span class="md-ellipsis">
       
-        goal
+        Use When
       
     </span>
   </a>
@@ -3179,10 +3201,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#stack" class="md-nav__link">
     <span class="md-ellipsis">
       
-        prerequisites
+        Stack
       
     </span>
   </a>
@@ -3190,10 +3212,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
+  <a href="#code-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        steps
+        Code Architecture
       
     </span>
   </a>
@@ -3201,10 +3223,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verification" class="md-nav__link">
+  <a href="#bootstrap" class="md-nav__link">
     <span class="md-ellipsis">
       
-        verification
+        Bootstrap
       
     </span>
   </a>
@@ -3212,10 +3234,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
+  <a href="#folder-structure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        common issues
+        Folder Structure
       
     </span>
   </a>
@@ -3223,10 +3245,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
+  <a href="#folder-responsibilities" class="md-nav__link">
     <span class="md-ellipsis">
       
-        see also
+        Folder Responsibilities
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#required-workflow-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Workflow Files
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notes
       
     </span>
   </a>
@@ -3250,7 +3294,7 @@
 
 
   
-    <a href="https://github.com/supanut9/ai-engineering-system/edit/main/cookbook/bootstrap-a-fastapi-service.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/supanut9/ai-engineering-system/edit/main/project-templates/rust/axum-hexagonal.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -3258,91 +3302,111 @@
   
 
 
-<h1 id="bootstrap-a-fastapi-service">bootstrap a fastapi service<a class="headerlink" href="#bootstrap-a-fastapi-service" title="Permanent link">&para;</a></h1>
-<h2 id="goal">goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
-<p>By the end of this recipe you will have a running FastAPI service skeleton with all four quality gates green: pytest passes, ruff reports no lint errors, mypy reports no type errors, and uvicorn starts the server on the default port.</p>
-<h2 id="prerequisites">prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h1 id="rust-axum-hexagonal">Rust Axum Hexagonal<a class="headerlink" href="#rust-axum-hexagonal" title="Permanent link">&para;</a></h1>
+<h2 id="use-when">Use When<a class="headerlink" href="#use-when" title="Permanent link">&para;</a></h2>
+<p>Use this blueprint when:</p>
 <ul>
-<li><strong>AI Engineering System</strong> cloned locally (referred to below as <code>$SYSTEM</code>).</li>
-<li><strong>bash 4+</strong> — macOS ships bash 3.2. Install with <code>brew install bash</code>.</li>
-<li><strong>Python 3.11+</strong> — <a href="https://www.python.org/downloads/">python.org/downloads</a>. The stack requires <code>tomllib</code> (3.11+) for tooling validation.</li>
-<li><strong>uv</strong> 0.11.14+ — <a href="https://docs.astral.sh/uv/">docs.astral.sh/uv</a>. Used by the generated <code>make setup</code> target.</li>
-<li><strong>make</strong> — pre-installed on macOS and Linux.</li>
-<li><strong>git</strong> — any recent version.</li>
+<li>the stack is Rust</li>
+<li>the HTTP framework is Axum</li>
+<li>the code architecture is hexagonal architecture</li>
+<li>the service has multiple integrations or clear inbound and outbound adapter
+  boundaries — or you expect it to grow there</li>
 </ul>
-<h2 id="steps">steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
-<p><strong>1. Run the init script with the FastAPI stack.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$SYSTEM</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./scripts/init-project.sh<span class="w"> </span>--name<span class="w"> </span>my-api<span class="w"> </span>--stack<span class="w"> </span>fastapi-layered<span class="w"> </span>--agent<span class="w"> </span>claude
-</code></pre></div>
-<p>Expected output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[info] Bootstrapped: ./my-api
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>   stack   : fastapi-layered
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>   agent   : claude
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>   system  : v0.0.1
-</code></pre></div>
-<p><strong>2. Enter the project.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>my-api
-</code></pre></div>
-<p><strong>3. Create and activate the virtual environment, install dependencies.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>make<span class="w"> </span>setup
-</code></pre></div>
-<p><code>make setup</code> runs <code>uv venv .venv &amp;&amp; uv pip install -e ".[dev]"</code>. Expected output ends with a list of installed packages and no errors. The virtual environment is at <code>.venv/</code>.</p>
-<p>Activate it for subsequent commands:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
-</code></pre></div>
-<p><strong>4. Run the test suite.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>make<span class="w"> </span><span class="nb">test</span>
-</code></pre></div>
-<p>This runs <code>pytest</code>. Expected output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>========================= test session starts ==========================
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>...
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>========================= N passed in 0.Xs ===========================
-</code></pre></div>
-<p>All tests must pass. The skeleton includes at minimum one health-endpoint test.</p>
-<p><strong>5. Run the linter.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>make<span class="w"> </span>lint
-</code></pre></div>
-<p>This runs <code>ruff check .</code>. Expected output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>All checks passed!
-</code></pre></div>
-<p><strong>6. Run the type checker.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>make<span class="w"> </span>typecheck
-</code></pre></div>
-<p>This runs <code>mypy --strict</code>. Expected output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Success: no issues found in N source files
-</code></pre></div>
-<p>If the skeleton ships without full type annotations, mypy may report errors. Fix them before proceeding: strict mypy is a gate, not a suggestion.</p>
-<p><strong>7. Start the server and verify the health endpoint.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>make<span class="w"> </span>run
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)</span>
-</code></pre></div>
-<p>In a second terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:8000/healthz
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># {&quot;status&quot;:&quot;ok&quot;}</span>
-</code></pre></div>
-<p><strong>8. Complete Phase 0 intake.</strong></p>
-<p>Open <code>.ai/workflow/project-context.md</code> and fill in the project goal, audience, and constraints. The generated layout places source code under <code>my_api/</code>, tests under <code>tests/</code>, and workflow artifacts under <code>.ai/workflow/</code>.</p>
-<h2 id="verification">verification<a class="headerlink" href="#verification" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>make<span class="w"> </span><span class="nb">test</span><span class="w">       </span><span class="c1"># pytest — exit 0</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>make<span class="w"> </span>lint<span class="w">       </span><span class="c1"># ruff — exit 0</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>make<span class="w"> </span>typecheck<span class="w">  </span><span class="c1"># mypy --strict — exit 0</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:8000/healthz<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>json.tool<span class="w">  </span><span class="c1"># prints {&quot;status&quot;: &quot;ok&quot;}</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nv">$SYSTEM</span>/scripts/doctor.sh<span class="w"> </span>--target<span class="w"> </span>.<span class="w">   </span><span class="c1"># exit 0, FAIL: 0</span>
-</code></pre></div>
-<h2 id="common-issues">common issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h2>
-<p><strong><code>uv: command not found</code></strong> — install uv: <code>curl -LsSf https://astral.sh/uv/install.sh | sh</code>. Restart your shell and verify with <code>uv --version</code>.</p>
-<p><strong><code>mypy --strict</code> fails on generated skeleton code</strong> — strict mode requires explicit type annotations on all function signatures. Add <code>-&gt; None</code> return types to functions without a return, and annotate all parameters. Do not disable strict mode as a workaround.</p>
-<p><strong><code>ruff check</code> flags imports in the generated <code>__init__.py</code></strong> — the skeleton may use a <code>from my_api import *</code> pattern that ruff flags as <code>F403</code>. Replace with explicit imports. The ruff config at <code>ruff.toml</code> intentionally enables <code>F403</code> detection.</p>
-<p><strong>Port 8000 conflict</strong> — set <code>make run PORT=9000</code> or <code>uvicorn my_api.main:app --port 9000 --reload</code> if another process holds port 8000.</p>
-<h2 id="see-also">see also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<h2 id="stack">Stack<a class="headerlink" href="#stack" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="../bootstrap-go-hexagonal/"><code>bootstrap-go-hexagonal.md</code></a> — the Go counterpart to this recipe.</li>
-<li><code>stacks/fastapi.md</code> — the FastAPI stack profile with version pins and conventions.</li>
-<li><code>project-templates/python/fastapi-layered.md</code> — the template blueprint for this stack's file layout.</li>
-<li><code>tooling/python/</code> — ruff, mypy, and pre-commit configs copied into the project by <code>init-project.sh</code>.</li>
-<li><a href="../run-the-hello-todo-example/"><code>run-the-hello-todo-example.md</code></a> — a fully filled-in reference project (Go) showing the same Phase 0–8 structure applied to a real service.</li>
-<li><code>workflow/ai-workflow.md</code> — the 8-phase workflow this service is set up to follow.</li>
+<li>language: Rust (edition 2024, MSRV 1.85)</li>
+<li>HTTP framework: Axum 0.8</li>
+<li>async runtime: Tokio 1.45 (multi-threaded)</li>
+<li>default database: PostgreSQL via <code>sqlx</code> (added when persistence is needed)</li>
+</ul>
+<p>See <code>stacks/rust.md</code> and <code>stacks/axum.md</code> for the full stack profile.</p>
+<h2 id="code-architecture">Code Architecture<a class="headerlink" href="#code-architecture" title="Permanent link">&para;</a></h2>
+<ul>
+<li>style: hexagonal architecture</li>
+<li>the <strong>core</strong> (under <code>src/core/</code>) has no axum, no tokio-specific types, and no
+  database crates in its dependency surface</li>
+<li><strong>ports</strong> (<code>src/ports/</code>) describe the use cases the core offers (inbound) and
+  what the core needs from the outside world (outbound)</li>
+<li><strong>adapters</strong> (<code>src/adapters/</code>) implement ports; the HTTP adapter lives under
+  <code>src/adapters/inbound/http/</code></li>
+</ul>
+<h2 id="bootstrap">Bootstrap<a class="headerlink" href="#bootstrap" title="Permanent link">&para;</a></h2>
+<p>Initial setup:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cargo<span class="w"> </span>build
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>cargo<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+<p>No <code>cargo init</code> or <code>cargo new</code> is required — the skeleton ships a complete
+<code>Cargo.toml</code>. Adjust <code>[package].name</code> from <code>my-service</code> to your project name
+before publishing.</p>
+<h2 id="folder-structure">Folder Structure<a class="headerlink" href="#folder-structure" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Cargo.toml
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>src/
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  main.rs                       # entrypoint — wires adapters + core
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  lib.rs                        # public module surface (integration tests)
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  core/
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    health.rs
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    mod.rs
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  ports/
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    inbound.rs                  # use-case traits the core fulfils
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    outbound.rs                 # traits the core needs externally
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    mod.rs
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  adapters/
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    inbound/
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>      http/
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        handlers.rs
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        routes.rs
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        mod.rs
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>      mod.rs
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    mod.rs
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>tests/                          # cargo integration tests
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>docs/
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>  requirements/
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>  specs/
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>  architecture/
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>  plan/
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>  tests/
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>  release/
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>  maintenance/
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>.ai/
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>  workflow/
+</code></pre></div>
+<h2 id="folder-responsibilities">Folder Responsibilities<a class="headerlink" href="#folder-responsibilities" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>src/main.rs</code> = composition root — constructs core services, wires adapters,
+  runs <code>axum::serve</code></li>
+<li><code>src/lib.rs</code> = re-exports so integration tests under <code>tests/</code> can reach into
+  the crate without going through <code>main</code></li>
+<li><code>src/core/</code> = protected business logic; depends only on standard library and
+  serde (for shared DTOs)</li>
+<li><code>src/ports/inbound.rs</code> = traits the inbound adapters call into</li>
+<li><code>src/ports/outbound.rs</code> = traits the core depends on; concrete adapters live
+  under <code>src/adapters/outbound/</code></li>
+<li><code>src/adapters/inbound/http/</code> = axum router, handlers, and HTTP-specific
+  translation (<code>State</code>, <code>Json</code>, status codes)</li>
+</ul>
+<h2 id="required-workflow-files">Required Workflow Files<a class="headerlink" href="#required-workflow-files" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>AGENTS.md</code> or <code>CLAUDE.md</code> depending on tool</li>
+<li><code>.ai/workflow/project-context.md</code></li>
+<li><code>.ai/workflow/workflow-state.md</code></li>
+<li><code>.ai/workflow/active-task.md</code></li>
+</ul>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>use axum only as an inbound adapter; the core never imports <code>axum</code> or <code>tokio</code>
+  beyond <code>tokio::sync</code> primitives that aren't tied to the runtime</li>
+<li>define ports only where they protect a real boundary — when a concrete struct
+  has only one implementation and is not crossing a deployment line, the trait
+  is premature</li>
+<li>prefer this blueprint over a flat <code>src/</code> layout when there is at least one
+  outbound integration (database, message broker, third-party API) or when
+  growth in that direction is on the next milestone</li>
+<li>when adding persistence, create <code>src/adapters/outbound/postgres/</code> and an
+  outbound port that exposes only the operations the core needs (not a generic
+  "Repository" interface)</li>
+<li>the skeleton's <code>routes::register</code> returns <code>Router</code>, not <code>Router&lt;S&gt;</code> — keeping
+  the router opaque to callers makes it trivial to compose multiple resource
+  routers without leaking shared state through the type signature</li>
 </ul>
 
 
@@ -3414,10 +3478,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "content.action.edit", "search.suggest", "search.highlight", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

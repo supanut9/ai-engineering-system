@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://supanut9.github.io/ai-engineering-system/cookbook/bootstrap-a-fastapi-service/">
+        <link rel="canonical" href="https://supanut9.github.io/ai-engineering-system/stacks/rust/">
       
       
-        <link rel="prev" href="../bootstrap-go-hexagonal/">
+        <link rel="prev" href="../nextjs/">
       
       
-        <link rel="next" href="../run-the-hello-todo-example/">
+        <link rel="next" href="../axum/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>Bootstrap a FastAPI Service - AI Engineering System</title>
+        <title>Rust - AI Engineering System</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#bootstrap-a-fastapi-service" class="md-skip">
+        <a href="#stack-profile-rust" class="md-skip">
           Skip to content
         </a>
       
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Bootstrap a FastAPI Service
+              Rust
             
           </span>
         </div>
@@ -305,11 +305,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../stacks/go/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../go/" class="md-tabs__link">
           
   
   
@@ -437,13 +439,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../cookbook/" class="md-tabs__link">
           
   
   
@@ -1121,8 +1121,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -1146,19 +1148,22 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -1176,7 +1181,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1194,7 +1199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/go/" class="md-nav__link">
+      <a href="../go/" class="md-nav__link">
         
   
   
@@ -1222,7 +1227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/nestjs/" class="md-nav__link">
+      <a href="../nestjs/" class="md-nav__link">
         
   
   
@@ -1250,7 +1255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/nextjs/" class="md-nav__link">
+      <a href="../nextjs/" class="md-nav__link">
         
   
   
@@ -1275,10 +1280,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../stacks/rust/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Rust
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1294,6 +1326,114 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-it-is" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What It Is
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use When
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#avoid-when" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Avoid When
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#typical-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Typical Use Cases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tooling-versions-verified-2026-05-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tooling Versions (verified 2026-05-17)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Frameworks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-not-to-reach-for-an-adapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Not To Reach For An Adapter
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1306,7 +1446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/axum/" class="md-nav__link">
+      <a href="../axum/" class="md-nav__link">
         
   
   
@@ -1334,7 +1474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/postgres/" class="md-nav__link">
+      <a href="../postgres/" class="md-nav__link">
         
   
   
@@ -1362,7 +1502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/redis/" class="md-nav__link">
+      <a href="../redis/" class="md-nav__link">
         
   
   
@@ -1390,7 +1530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../stacks/docker/" class="md-nav__link">
+      <a href="../docker/" class="md-nav__link">
         
   
   
@@ -2327,10 +2467,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -2362,22 +2500,19 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
         
           
-          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="">
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
             
   
   
@@ -2395,7 +2530,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2413,7 +2548,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../cookbook/" class="md-nav__link">
         
   
   
@@ -2441,7 +2576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bootstrap-go-hexagonal/" class="md-nav__link">
+      <a href="../../cookbook/bootstrap-go-hexagonal/" class="md-nav__link">
         
   
   
@@ -2466,37 +2601,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Bootstrap a FastAPI Service
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../cookbook/bootstrap-a-fastapi-service/" class="md-nav__link">
         
   
   
@@ -2512,92 +2620,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        goal
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        prerequisites
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        steps
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#verification" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        verification
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        common issues
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        see also
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2610,7 +2632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../run-the-hello-todo-example/" class="md-nav__link">
+      <a href="../../cookbook/run-the-hello-todo-example/" class="md-nav__link">
         
   
   
@@ -2638,7 +2660,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../add-an-adr/" class="md-nav__link">
+      <a href="../../cookbook/add-an-adr/" class="md-nav__link">
         
   
   
@@ -2666,7 +2688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../write-a-plan-file/" class="md-nav__link">
+      <a href="../../cookbook/write-a-plan-file/" class="md-nav__link">
         
   
   
@@ -2694,7 +2716,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../add-a-custom-claude-skill/" class="md-nav__link">
+      <a href="../../cookbook/add-a-custom-claude-skill/" class="md-nav__link">
         
   
   
@@ -2722,7 +2744,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../drive-the-workflow/" class="md-nav__link">
+      <a href="../../cookbook/drive-the-workflow/" class="md-nav__link">
         
   
   
@@ -2750,7 +2772,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../use-the-npm-wrapper/" class="md-nav__link">
+      <a href="../../cookbook/use-the-npm-wrapper/" class="md-nav__link">
         
   
   
@@ -2778,7 +2800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bootstrap-multi-service/" class="md-nav__link">
+      <a href="../../cookbook/bootstrap-multi-service/" class="md-nav__link">
         
   
   
@@ -2806,7 +2828,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../upgrade-system-version/" class="md-nav__link">
+      <a href="../../cookbook/upgrade-system-version/" class="md-nav__link">
         
   
   
@@ -2834,7 +2856,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../split-work-into-parallel-lanes/" class="md-nav__link">
+      <a href="../../cookbook/split-work-into-parallel-lanes/" class="md-nav__link">
         
   
   
@@ -3168,10 +3190,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goal" class="md-nav__link">
+  <a href="#what-it-is" class="md-nav__link">
     <span class="md-ellipsis">
       
-        goal
+        What It Is
       
     </span>
   </a>
@@ -3179,10 +3201,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
+  <a href="#use-when" class="md-nav__link">
     <span class="md-ellipsis">
       
-        prerequisites
+        Use When
       
     </span>
   </a>
@@ -3190,10 +3212,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#steps" class="md-nav__link">
+  <a href="#avoid-when" class="md-nav__link">
     <span class="md-ellipsis">
       
-        steps
+        Avoid When
       
     </span>
   </a>
@@ -3201,10 +3223,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#verification" class="md-nav__link">
+  <a href="#typical-use-cases" class="md-nav__link">
     <span class="md-ellipsis">
       
-        verification
+        Typical Use Cases
       
     </span>
   </a>
@@ -3212,10 +3234,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#common-issues" class="md-nav__link">
+  <a href="#tooling-versions-verified-2026-05-17" class="md-nav__link">
     <span class="md-ellipsis">
       
-        common issues
+        Tooling Versions (verified 2026-05-17)
       
     </span>
   </a>
@@ -3223,10 +3245,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
+  <a href="#conventions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        see also
+        Conventions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Frameworks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-not-to-reach-for-an-adapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Not To Reach For An Adapter
       
     </span>
   </a>
@@ -3250,7 +3294,7 @@
 
 
   
-    <a href="https://github.com/supanut9/ai-engineering-system/edit/main/cookbook/bootstrap-a-fastapi-service.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/supanut9/ai-engineering-system/edit/main/stacks/rust.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -3258,92 +3302,96 @@
   
 
 
-<h1 id="bootstrap-a-fastapi-service">bootstrap a fastapi service<a class="headerlink" href="#bootstrap-a-fastapi-service" title="Permanent link">&para;</a></h1>
-<h2 id="goal">goal<a class="headerlink" href="#goal" title="Permanent link">&para;</a></h2>
-<p>By the end of this recipe you will have a running FastAPI service skeleton with all four quality gates green: pytest passes, ruff reports no lint errors, mypy reports no type errors, and uvicorn starts the server on the default port.</p>
-<h2 id="prerequisites">prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<h1 id="stack-profile-rust">Stack Profile: Rust<a class="headerlink" href="#stack-profile-rust" title="Permanent link">&para;</a></h1>
+<h2 id="what-it-is">What It Is<a class="headerlink" href="#what-it-is" title="Permanent link">&para;</a></h2>
+<p>Rust is a statically typed, compiled systems language with strong memory and
+thread-safety guarantees enforced at compile time. The toolchain (rustc, cargo,
+clippy, rustfmt) is unified and consistent.</p>
+<p>Use Rust when you want:</p>
 <ul>
-<li><strong>AI Engineering System</strong> cloned locally (referred to below as <code>$SYSTEM</code>).</li>
-<li><strong>bash 4+</strong> — macOS ships bash 3.2. Install with <code>brew install bash</code>.</li>
-<li><strong>Python 3.11+</strong> — <a href="https://www.python.org/downloads/">python.org/downloads</a>. The stack requires <code>tomllib</code> (3.11+) for tooling validation.</li>
-<li><strong>uv</strong> 0.11.14+ — <a href="https://docs.astral.sh/uv/">docs.astral.sh/uv</a>. Used by the generated <code>make setup</code> target.</li>
-<li><strong>make</strong> — pre-installed on macOS and Linux.</li>
-<li><strong>git</strong> — any recent version.</li>
+<li>predictable performance and memory behavior without a garbage collector</li>
+<li>aggressive compile-time correctness — most concurrency bugs are caught before
+  the program runs</li>
+<li>a single binary deployable with no runtime dependency</li>
+<li>a strong type system that encodes invariants (ownership, lifetimes, Result,
+  Option) into the API surface</li>
 </ul>
-<h2 id="steps">steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
-<p><strong>1. Run the init script with the FastAPI stack.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$SYSTEM</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./scripts/init-project.sh<span class="w"> </span>--name<span class="w"> </span>my-api<span class="w"> </span>--stack<span class="w"> </span>fastapi-layered<span class="w"> </span>--agent<span class="w"> </span>claude
-</code></pre></div>
-<p>Expected output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[info] Bootstrapped: ./my-api
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>   stack   : fastapi-layered
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>   agent   : claude
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>   system  : v0.0.1
-</code></pre></div>
-<p><strong>2. Enter the project.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>my-api
-</code></pre></div>
-<p><strong>3. Create and activate the virtual environment, install dependencies.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>make<span class="w"> </span>setup
-</code></pre></div>
-<p><code>make setup</code> runs <code>uv venv .venv &amp;&amp; uv pip install -e ".[dev]"</code>. Expected output ends with a list of installed packages and no errors. The virtual environment is at <code>.venv/</code>.</p>
-<p>Activate it for subsequent commands:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
-</code></pre></div>
-<p><strong>4. Run the test suite.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>make<span class="w"> </span><span class="nb">test</span>
-</code></pre></div>
-<p>This runs <code>pytest</code>. Expected output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>========================= test session starts ==========================
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>...
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>========================= N passed in 0.Xs ===========================
-</code></pre></div>
-<p>All tests must pass. The skeleton includes at minimum one health-endpoint test.</p>
-<p><strong>5. Run the linter.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>make<span class="w"> </span>lint
-</code></pre></div>
-<p>This runs <code>ruff check .</code>. Expected output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>All checks passed!
-</code></pre></div>
-<p><strong>6. Run the type checker.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>make<span class="w"> </span>typecheck
-</code></pre></div>
-<p>This runs <code>mypy --strict</code>. Expected output:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Success: no issues found in N source files
-</code></pre></div>
-<p>If the skeleton ships without full type annotations, mypy may report errors. Fix them before proceeding: strict mypy is a gate, not a suggestion.</p>
-<p><strong>7. Start the server and verify the health endpoint.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>make<span class="w"> </span>run
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)</span>
-</code></pre></div>
-<p>In a second terminal:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:8000/healthz
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># {&quot;status&quot;:&quot;ok&quot;}</span>
-</code></pre></div>
-<p><strong>8. Complete Phase 0 intake.</strong></p>
-<p>Open <code>.ai/workflow/project-context.md</code> and fill in the project goal, audience, and constraints. The generated layout places source code under <code>my_api/</code>, tests under <code>tests/</code>, and workflow artifacts under <code>.ai/workflow/</code>.</p>
-<h2 id="verification">verification<a class="headerlink" href="#verification" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>make<span class="w"> </span><span class="nb">test</span><span class="w">       </span><span class="c1"># pytest — exit 0</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>make<span class="w"> </span>lint<span class="w">       </span><span class="c1"># ruff — exit 0</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>make<span class="w"> </span>typecheck<span class="w">  </span><span class="c1"># mypy --strict — exit 0</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>curl<span class="w"> </span>-s<span class="w"> </span>localhost:8000/healthz<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>json.tool<span class="w">  </span><span class="c1"># prints {&quot;status&quot;: &quot;ok&quot;}</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="nv">$SYSTEM</span>/scripts/doctor.sh<span class="w"> </span>--target<span class="w"> </span>.<span class="w">   </span><span class="c1"># exit 0, FAIL: 0</span>
-</code></pre></div>
-<h2 id="common-issues">common issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h2>
-<p><strong><code>uv: command not found</code></strong> — install uv: <code>curl -LsSf https://astral.sh/uv/install.sh | sh</code>. Restart your shell and verify with <code>uv --version</code>.</p>
-<p><strong><code>mypy --strict</code> fails on generated skeleton code</strong> — strict mode requires explicit type annotations on all function signatures. Add <code>-&gt; None</code> return types to functions without a return, and annotate all parameters. Do not disable strict mode as a workaround.</p>
-<p><strong><code>ruff check</code> flags imports in the generated <code>__init__.py</code></strong> — the skeleton may use a <code>from my_api import *</code> pattern that ruff flags as <code>F403</code>. Replace with explicit imports. The ruff config at <code>ruff.toml</code> intentionally enables <code>F403</code> detection.</p>
-<p><strong>Port 8000 conflict</strong> — set <code>make run PORT=9000</code> or <code>uvicorn my_api.main:app --port 9000 --reload</code> if another process holds port 8000.</p>
-<h2 id="see-also">see also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
+<h2 id="use-when">Use When<a class="headerlink" href="#use-when" title="Permanent link">&para;</a></h2>
+<p>Use Rust when:</p>
 <ul>
-<li><a href="../bootstrap-go-hexagonal/"><code>bootstrap-go-hexagonal.md</code></a> — the Go counterpart to this recipe.</li>
-<li><code>stacks/fastapi.md</code> — the FastAPI stack profile with version pins and conventions.</li>
-<li><code>project-templates/python/fastapi-layered.md</code> — the template blueprint for this stack's file layout.</li>
-<li><code>tooling/python/</code> — ruff, mypy, and pre-commit configs copied into the project by <code>init-project.sh</code>.</li>
-<li><a href="../run-the-hello-todo-example/"><code>run-the-hello-todo-example.md</code></a> — a fully filled-in reference project (Go) showing the same Phase 0–8 structure applied to a real service.</li>
-<li><code>workflow/ai-workflow.md</code> — the 8-phase workflow this service is set up to follow.</li>
+<li>the service has strict latency or tail-latency requirements</li>
+<li>you need to interop with C/C++ libraries or embedded systems</li>
+<li>correctness-critical code paths benefit from algebraic data types and pattern
+  matching</li>
+<li>the team is comfortable with a stronger type system in exchange for slower
+  initial development velocity</li>
+<li>long-term maintenance cost matters more than first-version speed</li>
 </ul>
+<h2 id="avoid-when">Avoid When<a class="headerlink" href="#avoid-when" title="Permanent link">&para;</a></h2>
+<p>Avoid Rust as the default choice when:</p>
+<ul>
+<li>the team would be much more productive in Go, Python, or TypeScript for the
+  same problem</li>
+<li>the service is a thin CRUD API where Rust's correctness guarantees are not
+  paying for the learning curve</li>
+<li>iteration speed matters more than absolute performance</li>
+<li>there is no in-team Rust expertise and no time budget to build it</li>
+</ul>
+<h2 id="typical-use-cases">Typical Use Cases<a class="headerlink" href="#typical-use-cases" title="Permanent link">&para;</a></h2>
+<ul>
+<li>low-latency HTTP APIs</li>
+<li>high-throughput stream processors</li>
+<li>CLI tooling that needs to be a single binary</li>
+<li>background workers with strict memory ceilings</li>
+<li>WebAssembly modules</li>
+</ul>
+<h2 id="tooling-versions-verified-2026-05-17">Tooling Versions (verified 2026-05-17)<a class="headerlink" href="#tooling-versions-verified-2026-05-17" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Rust edition: <strong>2024</strong></li>
+<li>MSRV (minimum supported Rust version): <strong>1.85</strong> — required for edition 2024</li>
+<li>Toolchain installer: <code>rustup</code></li>
+<li>Formatter: <code>rustfmt</code> (bundled with toolchain; configured via <code>rustfmt.toml</code>)</li>
+<li>Linter: <code>clippy</code> (bundled with toolchain; configured via <code>clippy.toml</code> and
+  per-crate <code>#![warn(clippy::...)]</code>)</li>
+<li>Build tool: <code>cargo</code> (bundled)</li>
+<li>Audit: <code>cargo-audit</code> (run in CI to flag advisories)</li>
+<li>Coverage (optional): <code>cargo-llvm-cov</code></li>
+</ul>
+<h2 id="conventions">Conventions<a class="headerlink" href="#conventions" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Pin the edition in <code>Cargo.toml</code> (<code>edition = "2024"</code>) and the MSRV
+  (<code>rust-version = "1.85"</code>).</li>
+<li>Use workspace inheritance once the project has two or more crates;
+  single-binary services keep one <code>Cargo.toml</code>.</li>
+<li>Treat <code>clippy::all</code> and <code>clippy::pedantic</code> as warnings, then ratchet specific
+  lints to deny in CI (<code>cargo clippy -- -D warnings</code>).</li>
+<li>Format on commit with <code>cargo fmt --all</code>; CI runs <code>cargo fmt --all -- --check</code>
+  as a gate.</li>
+<li>Tests live next to the code (<code>#[cfg(test)] mod tests</code>) for unit scope; under
+  <code>tests/</code> for integration scope. Property tests use <code>proptest</code>; snapshot tests
+  use <code>insta</code>.</li>
+<li>Errors propagate as <code>Result&lt;T, E&gt;</code> with <code>anyhow::Error</code> at adapter boundaries
+  and a domain <code>enum Error</code> inside the core when error variants need to drive
+  behavior.</li>
+</ul>
+<h2 id="recommended-frameworks">Recommended Frameworks<a class="headerlink" href="#recommended-frameworks" title="Permanent link">&para;</a></h2>
+<ul>
+<li>HTTP: <strong>axum</strong> (see <code>stacks/axum.md</code>) — Tokio-based, layered on <code>tower</code>.</li>
+<li>gRPC: <code>tonic</code>.</li>
+<li>Async runtime: <code>tokio</code> (multi-threaded for servers; current-thread for
+  embedded/CLI).</li>
+<li>Serialization: <code>serde</code> + <code>serde_json</code>.</li>
+<li>Tracing: <code>tracing</code> + <code>tracing-subscriber</code>.</li>
+<li>Database access: <code>sqlx</code> (compile-time-checked SQL) or <code>sea-orm</code> (when an ORM
+  is genuinely needed).</li>
+<li>Testing helpers: <code>tokio::test</code>, <code>assert_matches</code>, <code>wiremock</code> for HTTP fakes.</li>
+</ul>
+<h2 id="when-not-to-reach-for-an-adapter">When Not To Reach For An Adapter<a class="headerlink" href="#when-not-to-reach-for-an-adapter" title="Permanent link">&para;</a></h2>
+<p>Rust's type system makes "just pass a closure" or "just inline the helper"
+viable far longer than in other languages. Resist creating a trait or generic
+parameter before you have a second implementation that justifies the indirection.
+Hexagonal ports earn their keep when there are at least two adapters (real and
+test fake); below that, a concrete struct is enough.</p>
 
 
 
