@@ -2601,10 +2601,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-same-product-four-stacks" class="md-nav__link">
+  <a href="#the-same-product-five-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        the same product, four stacks
+        the same product, five stacks
       
     </span>
   </a>
@@ -2667,16 +2667,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hello-todo-fastify-typescript-fastify-hexagonal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hello-todo-fastify (TypeScript + Fastify + hexagonal)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#comparing-the-four" class="md-nav__link">
+  <a href="#comparing-the-five" class="md-nav__link">
     <span class="md-ellipsis">
       
-        comparing the four
+        comparing the five
       
     </span>
   </a>
@@ -3014,10 +3025,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-same-product-four-stacks" class="md-nav__link">
+  <a href="#the-same-product-five-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        the same product, four stacks
+        the same product, five stacks
       
     </span>
   </a>
@@ -3080,16 +3091,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hello-todo-fastify-typescript-fastify-hexagonal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hello-todo-fastify (TypeScript + Fastify + hexagonal)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#comparing-the-four" class="md-nav__link">
+  <a href="#comparing-the-five" class="md-nav__link">
     <span class="md-ellipsis">
       
-        comparing the four
+        comparing the five
       
     </span>
   </a>
@@ -3167,8 +3189,8 @@
 
 <h1 id="reference-examples">reference examples<a class="headerlink" href="#reference-examples" title="Permanent link">&para;</a></h1>
 <p>Each reference example is a tiny, fully filled-in project that walks all eight workflow phases end-to-end — Phase 0 intake, PRD, specs, architecture, ADR, planning, working code, tests, CI, and runbook. They are the proof-of-correctness for the workflow: a contributor can read any example and see what every artifact looks like when it is actually filled in for a real, if small, service. Nothing in the abstract workflow documentation substitutes for seeing a Phase 3 ADR or a Phase 5 runbook written out against a concrete problem.</p>
-<h2 id="the-same-product-four-stacks">the same product, four stacks<a class="headerlink" href="#the-same-product-four-stacks" title="Permanent link">&para;</a></h2>
-<p>All four examples implement the same single-tenant in-memory todo-list HTTP API: six endpoints (<code>POST /todos</code>, <code>GET /todos</code>, <code>GET /todos/:id</code>, <code>PATCH /todos/:id</code>, <code>DELETE /todos/:id</code>, and <code>GET /health</code>), a single <code>Todo</code> entity with <code>id</code>, <code>title</code>, <code>done</code>, and <code>createdAt</code> fields, and a shared error envelope (<code>{"error": {"code": "...", "message": "..."}}</code>). The differences are entirely in how each stack idiom shapes the implementation — folder layout, dependency injection style, validation approach, and test harness.</p>
+<h2 id="the-same-product-five-stacks">the same product, five stacks<a class="headerlink" href="#the-same-product-five-stacks" title="Permanent link">&para;</a></h2>
+<p>All five examples implement the same single-tenant in-memory todo-list HTTP API: six endpoints (<code>POST /todos</code>, <code>GET /todos</code>, <code>GET /todos/:id</code>, <code>PATCH /todos/:id</code>, <code>DELETE /todos/:id</code>, and <code>GET /health</code>), a single <code>Todo</code> entity with <code>id</code>, <code>title</code>, <code>done</code>, and <code>createdAt</code> fields, and a shared error envelope (<code>{"error": {"code": "...", "message": "..."}}</code>). The differences are entirely in how each stack idiom shapes the implementation — folder layout, dependency injection style, validation approach, and test harness.</p>
 <h2 id="examples">examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="hello-todo-go-go-gin-hexagonal"><code>hello-todo-go</code> (Go + Gin + hexagonal)<a class="headerlink" href="#hello-todo-go-go-gin-hexagonal" title="Permanent link">&para;</a></h3>
 <p><strong>Status:</strong> available since v0.0.1.</p>
@@ -3198,7 +3220,14 @@
 <p><strong>What this example teaches:</strong> how to compose a Next.js App Router app around a small services/lib layered split; when an RSC reading the repo directly is the right move; how Vitest + @testing-library/react slot into a real Next.js project (avoiding the Jest/Next 16 friction).</p>
 <p><strong>Path:</strong> <code>examples/hello-todo-nextjs/</code></p>
 <hr />
-<h2 id="comparing-the-four">comparing the four<a class="headerlink" href="#comparing-the-four" title="Permanent link">&para;</a></h2>
+<h3 id="hello-todo-fastify-typescript-fastify-hexagonal"><code>hello-todo-fastify</code> (TypeScript + Fastify + hexagonal)<a class="headerlink" href="#hello-todo-fastify-typescript-fastify-hexagonal" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> available since v0.4.0.</p>
+<p><strong>Stack:</strong> Fastify 5.8.x, TypeScript 6.0+, Zod 4 via <code>fastify-type-provider-zod</code>, pino logging, Vitest 4, hexagonal architecture, in-memory storage.</p>
+<p><strong>Highlights:</strong> the closest TypeScript counterpart to <code>hello-todo-go</code> — same <code>/v1/todos</code> API shape, same <code>:8080</code> port, same error envelope. Validation is split between Zod schemas at the HTTP boundary (structural type checks; Fastify rejects malformed requests with 400) and the core service (business rules like <code>trim</code>, length bounds). The composition root in <code>src/index.ts</code> wires repo → service → server in three lines. Route integration tests use <code>fastify.inject()</code> for in-process exercise (no socket).</p>
+<p><strong>What this example teaches:</strong> how Fastify's typed plugin architecture composes a hexagonal core; how Zod doubles as both request validation and response serialisation; the trade-off between Fastify's lightweight DX and a heavier framework like NestJS.</p>
+<p><strong>Path:</strong> <code>examples/hello-todo-fastify/</code></p>
+<hr />
+<h2 id="comparing-the-five">comparing the five<a class="headerlink" href="#comparing-the-five" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3207,6 +3236,7 @@
 <th>FastAPI</th>
 <th>NestJS</th>
 <th>Next.js</th>
+<th>Fastify</th>
 </tr>
 </thead>
 <tbody>
@@ -3214,8 +3244,9 @@
 <td>Architecture name</td>
 <td>hexagonal</td>
 <td>layered</td>
-<td>layered (via modules + DI)</td>
-<td>layered (App Router + services/lib)</td>
+<td>layered (modules + DI)</td>
+<td>layered (App Router + services)</td>
+<td>hexagonal</td>
 </tr>
 <tr>
 <td>Validation lives in</td>
@@ -3223,13 +3254,15 @@
 <td>Pydantic DTOs at the boundary</td>
 <td>class-validator on DTOs</td>
 <td>hand-rolled validators in <code>types/</code></td>
+<td>Zod schemas at the boundary + service rules</td>
 </tr>
 <tr>
 <td>Error mapping</td>
 <td>handler maps service errors to envelope</td>
 <td>global exception handler</td>
 <td>global exception filter</td>
-<td>route handler maps service errors to envelope</td>
+<td>route handler maps service errors</td>
+<td><code>setErrorHandler</code> on Fastify instance</td>
 </tr>
 <tr>
 <td>Test harness</td>
@@ -3237,13 +3270,15 @@
 <td><code>TestClient</code> (httpx)</td>
 <td><code>@nestjs/testing</code> + supertest</td>
 <td>Vitest + @testing-library/react</td>
+<td>Vitest + <code>fastify.inject()</code></td>
 </tr>
 <tr>
 <td>Composition root</td>
 <td><code>cmd/api/main.go</code></td>
 <td><code>main.py:app</code> factory</td>
 <td><code>main.ts</code> + <code>AppModule</code></td>
-<td>App Router (<code>src/app/</code>) — no explicit composition root</td>
+<td>App Router (<code>src/app/</code>) — implicit</td>
+<td><code>src/index.ts</code> (3 lines)</td>
 </tr>
 <tr>
 <td>Total code files</td>
@@ -3251,6 +3286,7 @@
 <td>~17</td>
 <td>~22</td>
 <td>~19</td>
+<td>~16</td>
 </tr>
 </tbody>
 </table>
@@ -3275,7 +3311,6 @@
 <h2 id="future-examples">future examples<a class="headerlink" href="#future-examples" title="Permanent link">&para;</a></h2>
 <p>Planned for later releases:</p>
 <ul>
-<li><code>hello-todo-fastify</code> — minimal Fastify hexagonal counterpart; mirrors the Go example more directly than the FastAPI version does.</li>
 <li><code>hello-todo-react-native-expo</code> — mobile-shaped example with a synced offline-first todo store.</li>
 </ul>
 <h2 id="see-also">see also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
