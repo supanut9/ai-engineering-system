@@ -62,11 +62,13 @@ Options:
 Supported examples:
   hello-todo-go        Go / Gin hexagonal reference project
   hello-todo-nextjs    Next.js / App Router layered reference project
+  hello-todo-fastify   Fastify / hexagonal reference project (TypeScript)
 
 Examples:
   $(basename -- "$0")
   $(basename -- "$0") --example hello-todo-go
   $(basename -- "$0") --example hello-todo-nextjs
+  $(basename -- "$0") --example hello-todo-fastify
 EOF
 }
 
@@ -127,6 +129,10 @@ detect_stack() {
     fi
     if [[ -f "${dir}/nest-cli.json" ]]; then
       echo "nestjs"; return
+    fi
+    # Fastify: look for a fastify dependency in package.json.
+    if grep -q '"fastify"' "${dir}/package.json" 2>/dev/null; then
+      echo "fastify"; return
     fi
     echo "node"; return
   fi
@@ -346,6 +352,95 @@ verify_nextjs() {
 }
 
 # ============================================================
+# Verify: Fastify
+# ============================================================
+verify_fastify() {
+  local dir="$1"
+
+  # --- npm install ---
+  info "[1/5] npm install"
+  (cd "${dir}" && npm install --no-audit --no-fund --silent)
+
+  # --- vitest run ---
+  info "[2/5] make test (vitest run)"
+  (cd "${dir}" && make test)
+
+  # --- lint ---
+  info "[3/5] make lint"
+  (cd "${dir}" && make lint)
+
+  # --- build (tsc) ---
+  info "[4/5] make build (tsc)"
+  (cd "${dir}" && make build)
+
+  # --- start built server on a non-default port to avoid local clashes ---
+  info "[5/5] starting built server (node dist/index.js)"
+  local port="8181"
+  (cd "${dir}" && PORT="${port}" node dist/index.js >/dev/null 2>&1) &
+  API_PID="$!"
+
+  local deadline=10
+  local elapsed=0
+  local ready=false
+  while (( elapsed < deadline )); do
+    if curl -sf "http://127.0.0.1:${port}/healthz" >/dev/null 2>&1; then
+      ready=true
+      break
+    fi
+    sleep 1
+    (( elapsed += 1 ))
+  done
+
+  if [[ "${ready}" != "true" ]]; then
+    die "verify-example: fastify server did not become ready within ${deadline}s"
+  fi
+  info "[smoke] Server ready on port ${port}"
+
+  local base="http://127.0.0.1:${port}"
+
+  # 1. GET /healthz
+  info "[smoke] GET /healthz"
+  curl -sf "${base}/healthz" >/dev/null
+
+  # 2. POST /v1/todos
+  info "[smoke] POST /v1/todos"
+  local create_resp todo_id
+  create_resp="$(curl -sf -X POST "${base}/v1/todos" \
+    -H "Content-Type: application/json" \
+    -d '{"title":"verify smoke test"}')"
+  todo_id="$(printf '%s' "${create_resp}" | grep -o '"id":"[^"]*"' | head -1 | cut -d'"' -f4)"
+  if [[ -z "${todo_id}" ]]; then
+    die "verify-example: POST /v1/todos returned no id"
+  fi
+  info "[smoke] Created todo id=${todo_id}"
+
+  # 3. GET /v1/todos
+  info "[smoke] GET /v1/todos"
+  curl -sf "${base}/v1/todos" >/dev/null
+
+  # 4. GET /v1/todos/{id}
+  info "[smoke] GET /v1/todos/${todo_id}"
+  curl -sf "${base}/v1/todos/${todo_id}" >/dev/null
+
+  # 5. PATCH /v1/todos/{id}
+  info "[smoke] PATCH /v1/todos/${todo_id}"
+  curl -sf -X PATCH "${base}/v1/todos/${todo_id}" \
+    -H "Content-Type: application/json" \
+    -d '{"completed":true}' >/dev/null
+
+  # 6. DELETE /v1/todos/{id}
+  info "[smoke] DELETE /v1/todos/${todo_id}"
+  local http_status
+  http_status="$(curl -s -o /dev/null -w "%{http_code}" \
+    -X DELETE "${base}/v1/todos/${todo_id}")"
+  if [[ "${http_status}" != "204" ]]; then
+    die "verify-example: DELETE /v1/todos/${todo_id} returned ${http_status}, expected 204"
+  fi
+
+  info "[smoke] All 6 endpoints passed"
+}
+
+# ============================================================
 # Verify: Node / Nest (placeholder)
 # ============================================================
 verify_node() {
@@ -363,6 +458,8 @@ case "${STACK}" in
     verify_go "${EXAMPLE_DIR}" ;;
   nextjs)
     verify_nextjs "${EXAMPLE_DIR}" ;;
+  fastify)
+    verify_fastify "${EXAMPLE_DIR}" ;;
   nestjs|node)
     verify_node "${EXAMPLE_DIR}" ;;
   *)
