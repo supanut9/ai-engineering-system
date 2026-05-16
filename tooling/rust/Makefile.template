@@ -1,0 +1,42 @@
+.PHONY: setup run test test-integration lint lint-fix fmt build audit clean help
+
+NAME ?= $(shell basename $(CURDIR))
+PORT ?= 8080
+
+setup:
+	cargo fetch
+
+run:
+	cargo run --bin api
+
+test:
+	cargo test --all-features
+
+# Integration test: build release binary, hit /healthz, then kill.
+test-integration: build
+	@./target/release/api & API_PID=$$!; \
+	sleep 1; \
+	curl -sf http://localhost:$(PORT)/healthz > /dev/null && echo "integration: healthz OK" || (kill $$API_PID; exit 1); \
+	kill $$API_PID
+
+lint:
+	cargo fmt --all -- --check
+	cargo clippy --all-targets --all-features -- -D warnings
+
+lint-fix:
+	cargo fmt --all
+	cargo clippy --all-targets --all-features --fix --allow-dirty --allow-staged
+
+fmt: lint-fix
+
+build:
+	cargo build --release --bin api
+
+audit:
+	cargo audit
+
+clean:
+	cargo clean
+
+help:
+	@echo "Targets: setup run test test-integration lint lint-fix fmt build audit clean"

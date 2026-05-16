@@ -60,12 +60,14 @@ ALL_STACKS=(
   "fastify-hexagonal"
   "fastapi-layered"
   "react-native-expo"
+  "rust-axum-hexagonal"
 )
 
 NODE_STACKS=("nestjs-layered" "nextjs-default" "fastify-hexagonal" "react-native-expo")
 GO_STACKS=("go-gin-layered" "go-gin-clean" "go-gin-hexagonal")
 # shellcheck disable=SC2034
 PYTHON_STACKS=("fastapi-layered")
+RUST_STACKS=("rust-axum-hexagonal")
 
 # ============================================================
 # Usage
@@ -164,11 +166,13 @@ HAS_GO=false
 HAS_NODE=false
 HAS_NPM=false
 HAS_PYTHON=false
+HAS_CARGO=false
 
 command -v go      >/dev/null 2>&1 && HAS_GO=true
 command -v node    >/dev/null 2>&1 && HAS_NODE=true
 command -v npm     >/dev/null 2>&1 && HAS_NPM=true
 command -v python3 >/dev/null 2>&1 && HAS_PYTHON=true
+command -v cargo   >/dev/null 2>&1 && HAS_CARGO=true
 
 # ============================================================
 # Result tracking
@@ -233,7 +237,7 @@ test_stack() {
   local stack="$1"
   _CURRENT_STACK="${stack}"
 
-  local is_go=false is_node=false is_python=false
+  local is_go=false is_node=false is_python=false is_rust=false
   if contains_element "${stack}" "${GO_STACKS[@]}"; then
     is_go=true
   fi
@@ -242,6 +246,9 @@ test_stack() {
   fi
   if contains_element "${stack}" "${PYTHON_STACKS[@]}"; then
     is_python=true
+  fi
+  if contains_element "${stack}" "${RUST_STACKS[@]}"; then
+    is_rust=true
   fi
 
   # --- Tool availability check ---
@@ -263,6 +270,14 @@ test_stack() {
   fi
   if [[ "${is_python}" == "true" ]] && [[ "${HAS_PYTHON}" == "false" ]]; then
     warn "selftest: 'python3' not found on PATH — skipping ${stack}"
+    _mark_all "${stack}" "SKIP"
+    if [[ "${ARG_STACKS_RAW}" != "all" ]]; then
+      EXPLICITLY_SKIPPED=true
+    fi
+    return 0
+  fi
+  if [[ "${is_rust}" == "true" ]] && [[ "${HAS_CARGO}" == "false" ]]; then
+    warn "selftest: 'cargo' not found on PATH — skipping ${stack}"
     _mark_all "${stack}" "SKIP"
     if [[ "${ARG_STACKS_RAW}" != "all" ]]; then
       EXPLICITLY_SKIPPED=true
@@ -307,12 +322,12 @@ test_stack() {
   fi
 
   # --- make test ---
-  if [[ "${is_go}" == "true" || "${is_node}" == "true" || "${is_python}" == "true" ]]; then
+  if [[ "${is_go}" == "true" || "${is_node}" == "true" || "${is_python}" == "true" || "${is_rust}" == "true" ]]; then
     _run_step test "${target_dir}" make test || true
   fi
 
   # --- make lint ---
-  if [[ "${is_go}" == "true" || "${is_node}" == "true" || "${is_python}" == "true" ]]; then
+  if [[ "${is_go}" == "true" || "${is_node}" == "true" || "${is_python}" == "true" || "${is_rust}" == "true" ]]; then
     _run_step lint "${target_dir}" make lint || true
   fi
 
@@ -362,6 +377,14 @@ test_stack() {
     # Python: build target equivalent is the typecheck step.
     info "  [build] make typecheck (mypy strict)"
     if (cd "${target_dir}" && make typecheck); then
+      results_build["${stack}"]="OK"
+    else
+      results_build["${stack}"]="FAIL"
+      OVERALL_PASS=false
+    fi
+  elif [[ "${is_rust}" == "true" ]]; then
+    info "  [build] cargo build --release --bin api"
+    if (cd "${target_dir}" && cargo build --release --bin api); then
       results_build["${stack}"]="OK"
     else
       results_build["${stack}"]="FAIL"

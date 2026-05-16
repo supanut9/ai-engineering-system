@@ -74,6 +74,7 @@ VALID_STACKS=(
   "fastify-hexagonal"
   "fastapi-layered"
   "react-native-expo"
+  "rust-axum-hexagonal"
 )
 
 VALID_AGENTS=("claude" "codex" "both")
@@ -360,6 +361,15 @@ android/app/build/
 EOMI
 }
 
+_rust_ignores() {
+  cat <<EORUSTI
+# Rust
+target/
+Cargo.lock.bak
+*.rs.bk
+EORUSTI
+}
+
 _common_ignores() {
   cat <<EOCOMMON
 # Common
@@ -384,6 +394,8 @@ EOCOMMON
       _python_ignores ;;
     react-native-*)
       _mobile_ignores ;;
+    rust-*)
+      _rust_ignores ;;
   esac
   echo ""
   _common_ignores
@@ -493,6 +505,9 @@ _copy_tooling_for_stack() {
       # eslint.config.mjs with eslint-config-expo's flat config.
       _copy_dir_contents "${TOOLING_SRC}/nodejs" "${TARGET_DIR}"
       _copy_dir_contents "${TOOLING_SRC}/react-native" "${TARGET_DIR}"
+      ;;
+    rust-*)
+      _copy_dir_contents "${TOOLING_SRC}/rust" "${TARGET_DIR}"
       ;;
     *)
       warn "  No tooling profile for stack '${ARG_STACK}' — skipping"
