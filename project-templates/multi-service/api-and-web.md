@@ -143,9 +143,8 @@ Per app (unchanged from the single-service blueprint):
 ## Root Files
 
 The umbrella root needs five files that `init-project.sh` does not generate when
-invoked twice. See
-[`templates/docs/multi-service-root-readme.md`](../../templates/docs/multi-service-root-readme.md)
-and the cookbook recipe for filled-in versions:
+invoked twice. See `templates/docs/multi-service-root-readme.md` in the system
+repo and the `bootstrap-multi-service` cookbook recipe for filled-in versions:
 
 1. `README.md` — top-level product README that lists each app and points at
    per-app READMEs.
