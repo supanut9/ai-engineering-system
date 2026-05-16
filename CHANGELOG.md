@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Releases are managed automatically by [release-please](https://github.com/googleapis/release-please-action). Commits on `main` that follow Conventional Commits drive the next version bump and the entries below; see the contributing guide for the format.
 
+## [0.5.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.4.0...ai-engineering-system-v0.5.0) (2026-05-16)
+
+
+### Features
+
+* **examples:** add hello-todo-react-native-expo as the mobile reference ([ab6e6a2](https://github.com/supanut9/ai-engineering-system/commit/ab6e6a2c13ae005344c3c5c1913f920be7fa03cf))
+
+
+### Bug Fixes
+
+* **examples/rn-expo:** rewrap project-brief to avoid MD004 false-positive ([afbfb9f](https://github.com/supanut9/ai-engineering-system/commit/afbfb9fbbf4fa7de425eefd827b41ada0dd17f06))
+
 ## [0.4.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.3.0...ai-engineering-system-v0.4.0) (2026-05-16)
 
 
