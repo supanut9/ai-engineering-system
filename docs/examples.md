@@ -2,9 +2,11 @@
 
 Each reference example is a tiny, fully filled-in project that walks all eight workflow phases end-to-end — Phase 0 intake, PRD, specs, architecture, ADR, planning, working code, tests, CI, and runbook. They are the proof-of-correctness for the workflow: a contributor can read any example and see what every artifact looks like when it is actually filled in for a real, if small, service. Nothing in the abstract workflow documentation substitutes for seeing a Phase 3 ADR or a Phase 5 runbook written out against a concrete problem.
 
-## the same product, five stacks
+## the same product, six stacks
 
-All five examples implement the same single-tenant in-memory todo-list HTTP API: six endpoints (`POST /todos`, `GET /todos`, `GET /todos/:id`, `PATCH /todos/:id`, `DELETE /todos/:id`, and `GET /health`), a single `Todo` entity with `id`, `title`, `done`, and `createdAt` fields, and a shared error envelope (`{"error": {"code": "...", "message": "..."}}`). The differences are entirely in how each stack idiom shapes the implementation — folder layout, dependency injection style, validation approach, and test harness.
+Five of the six examples implement the same single-tenant in-memory todo-list HTTP API: six endpoints (`POST /todos`, `GET /todos`, `GET /todos/:id`, `PATCH /todos/:id`, `DELETE /todos/:id`, and `GET /health`), a single `Todo` entity with `id`, `title`, `done`, and `createdAt` fields, and a shared error envelope (`{"error": {"code": "...", "message": "..."}}`). The differences are entirely in how each stack idiom shapes the implementation — folder layout, dependency injection style, validation approach, and test harness.
+
+The sixth example — `hello-todo-react-native-expo` — is **deliberately the odd one out**: a mobile app with no backend, no HTTP API, and offline-first persistence via AsyncStorage. It is the system's reference for how a mobile-shaped project diverges from a server-shaped one (no `api-spec.md`; a new `screens.md`; an EAS-based deployment plan).
 
 ## examples
 
@@ -78,7 +80,21 @@ All five examples implement the same single-tenant in-memory todo-list HTTP API:
 
 ---
 
-## comparing the five
+### `hello-todo-react-native-expo` (TypeScript + Expo + AsyncStorage)
+
+**Status:** available since v0.5.0.
+
+**Stack:** Expo SDK 55, Expo Router, React Native 0.85, React 19.2, TypeScript 6.0+, AsyncStorage for offline persistence, Jest with `jest-expo` preset + `@testing-library/react-native`.
+
+**Highlights:** the system's reference for a **mobile-shaped** project — no backend, no HTTP, no port. Two screens (list + add modal) wire through a single `useTodos` hook that hydrates from AsyncStorage on mount and writes back on every mutation. The data layer is a thin in-memory `Map` + serialise-to-AsyncStorage rather than a redux/zustand store, keeping dependencies minimal. Uses `Pressable` rather than `TouchableOpacity` to side-step a renderer version-mismatch issue under jest-expo 55.
+
+**What this example teaches:** how Expo Router (file-system routing) shapes a mobile app the same way Next.js App Router shapes a web one; how load-on-mount + save-on-mutate persistence behaves for a small offline-first app; how the "Phase 7 deployment plan" looks when the production target is App Store Connect / Play Console / EAS Update OTAs instead of a Kubernetes cluster.
+
+**Path:** `examples/hello-todo-react-native-expo/`
+
+---
+
+## comparing the five backend stacks
 
 | | Go | FastAPI | NestJS | Next.js | Fastify |
 |---|---|---|---|---|---|
@@ -116,9 +132,11 @@ See the [governance](governance.md) page for how to propose a new example via a 
 
 ## future examples
 
-Planned for later releases:
+The current six examples cover the system's core stacks. Future additions will be driven by community demand. Candidates worth considering:
 
-- `hello-todo-react-native-expo` — mobile-shaped example with a synced offline-first todo store.
+- A `hello-todo-rust-axum` Rust counterpart (hexagonal, mirrors `hello-todo-go`).
+- A `hello-todo-elixir-phoenix` example to demonstrate a non-OO language stack.
+- A "todo + Postgres" variant of one of the existing stacks to demonstrate the persistence-adapter shape.
 
 ## see also
 

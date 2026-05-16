@@ -60,15 +60,19 @@ Options:
   --help, -h        Print this help and exit
 
 Supported examples:
-  hello-todo-go        Go / Gin hexagonal reference project
-  hello-todo-nextjs    Next.js / App Router layered reference project
-  hello-todo-fastify   Fastify / hexagonal reference project (TypeScript)
+  hello-todo-go                    Go / Gin hexagonal reference project
+  hello-todo-nextjs                Next.js / App Router layered reference project
+  hello-todo-fastify               Fastify / hexagonal reference project (TypeScript)
+  hello-todo-nestjs                NestJS / modules + DI reference project
+  hello-todo-react-native-expo     Expo / mobile reference project
 
 Examples:
   $(basename -- "$0")
   $(basename -- "$0") --example hello-todo-go
   $(basename -- "$0") --example hello-todo-nextjs
   $(basename -- "$0") --example hello-todo-fastify
+  $(basename -- "$0") --example hello-todo-nestjs
+  $(basename -- "$0") --example hello-todo-react-native-expo
 EOF
 }
 
@@ -129,6 +133,10 @@ detect_stack() {
     fi
     if [[ -f "${dir}/nest-cli.json" ]]; then
       echo "nestjs"; return
+    fi
+    # Expo / React Native: app.json + expo dep.
+    if [[ -f "${dir}/app.json" ]] && grep -q '"expo"' "${dir}/package.json" 2>/dev/null; then
+      echo "react-native"; return
     fi
     # Fastify: look for a fastify dependency in package.json.
     if grep -q '"fastify"' "${dir}/package.json" 2>/dev/null; then
@@ -441,11 +449,117 @@ verify_fastify() {
 }
 
 # ============================================================
-# Verify: Node / Nest (placeholder)
+# Verify: NestJS
+# ============================================================
+verify_nestjs() {
+  local dir="$1"
+
+  # --- npm install ---
+  info "[1/5] npm install"
+  (cd "${dir}" && npm install --no-audit --no-fund --silent)
+
+  # --- jest run ---
+  info "[2/5] make test (jest)"
+  (cd "${dir}" && make test)
+
+  # --- lint (tsc --noEmit in current NestJS examples) ---
+  info "[3/5] make lint"
+  (cd "${dir}" && make lint)
+
+  # --- build (nest build) ---
+  info "[4/5] make build (nest build)"
+  (cd "${dir}" && make build)
+
+  # --- start built server on a non-default port to avoid clashes ---
+  info "[5/5] starting built server (node dist/main)"
+  local port="3181"
+  (cd "${dir}" && PORT="${port}" node dist/main >/dev/null 2>&1) &
+  API_PID="$!"
+
+  local deadline=15
+  local elapsed=0
+  local ready=false
+  while (( elapsed < deadline )); do
+    if curl -sf "http://127.0.0.1:${port}/healthz" >/dev/null 2>&1; then
+      ready=true
+      break
+    fi
+    sleep 1
+    (( elapsed += 1 ))
+  done
+
+  if [[ "${ready}" != "true" ]]; then
+    die "verify-example: nestjs server did not become ready within ${deadline}s"
+  fi
+  info "[smoke] Server ready on port ${port}"
+
+  local base="http://127.0.0.1:${port}"
+
+  info "[smoke] GET /healthz"
+  curl -sf "${base}/healthz" >/dev/null
+
+  info "[smoke] POST /v1/todos"
+  local create_resp todo_id
+  create_resp="$(curl -sf -X POST "${base}/v1/todos" \
+    -H "Content-Type: application/json" \
+    -d '{"title":"verify smoke test"}')"
+  todo_id="$(printf '%s' "${create_resp}" | grep -o '"id":"[^"]*"' | head -1 | cut -d'"' -f4)"
+  if [[ -z "${todo_id}" ]]; then
+    die "verify-example: POST /v1/todos returned no id"
+  fi
+  info "[smoke] Created todo id=${todo_id}"
+
+  info "[smoke] GET /v1/todos"
+  curl -sf "${base}/v1/todos" >/dev/null
+
+  info "[smoke] GET /v1/todos/${todo_id}"
+  curl -sf "${base}/v1/todos/${todo_id}" >/dev/null
+
+  info "[smoke] PATCH /v1/todos/${todo_id}"
+  curl -sf -X PATCH "${base}/v1/todos/${todo_id}" \
+    -H "Content-Type: application/json" \
+    -d '{"completed":true}' >/dev/null
+
+  info "[smoke] DELETE /v1/todos/${todo_id}"
+  local http_status
+  http_status="$(curl -s -o /dev/null -w "%{http_code}" \
+    -X DELETE "${base}/v1/todos/${todo_id}")"
+  if [[ "${http_status}" != "204" ]]; then
+    die "verify-example: DELETE /v1/todos/${todo_id} returned ${http_status}, expected 204"
+  fi
+
+  info "[smoke] All 6 endpoints passed"
+}
+
+# ============================================================
+# Verify: React Native / Expo (no HTTP server — make targets only)
+# ============================================================
+verify_react_native() {
+  local dir="$1"
+
+  info "[1/4] npm install"
+  (cd "${dir}" && npm install --no-audit --no-fund --silent)
+
+  info "[2/4] make test (jest-expo)"
+  (cd "${dir}" && make test)
+
+  info "[3/4] make lint (eslint)"
+  (cd "${dir}" && make lint)
+
+  # Expo has no traditional JS build step; typecheck is the closest gate, matching
+  # selftest.sh's react-native handling.
+  info "[4/4] make typecheck (tsc --noEmit)"
+  (cd "${dir}" && make typecheck)
+
+  info "[smoke] No HTTP server to smoke — typecheck is the build-equivalent gate"
+}
+
+# ============================================================
+# Verify: Node (generic — placeholder)
 # ============================================================
 verify_node() {
   local dir="$1"
-  warn "verify-example: stack 'node/nestjs' smoke checks are not yet implemented."
+  warn "verify-example: generic 'node' stack smoke checks are not yet implemented."
   warn "  Directory: ${dir}"
   warn "  Skipping."
 }
@@ -460,7 +574,11 @@ case "${STACK}" in
     verify_nextjs "${EXAMPLE_DIR}" ;;
   fastify)
     verify_fastify "${EXAMPLE_DIR}" ;;
-  nestjs|node)
+  nestjs)
+    verify_nestjs "${EXAMPLE_DIR}" ;;
+  react-native)
+    verify_react_native "${EXAMPLE_DIR}" ;;
+  node)
     verify_node "${EXAMPLE_DIR}" ;;
   *)
     die "verify-example: unrecognised stack '${STACK}' for example '${ARG_EXAMPLE}'" ;;
