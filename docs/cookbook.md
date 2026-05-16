@@ -17,6 +17,7 @@ Each recipe is a self-contained walkthrough with exact commands, expected output
 | [bootstrap-a-fastapi-service](cookbook/bootstrap-a-fastapi-service.md) | Bootstrap a FastAPI service with the `--stack fastapi-layered` profile, confirm all four quality gates (pytest, ruff, mypy, uvicorn), and understand the generated layout. |
 | [split-work-into-parallel-lanes](cookbook/split-work-into-parallel-lanes.md) | Apply the parallel-lanes-and-waves pattern from `workflow/subagent-contract.md` to decompose a real feature across multiple Claude Code subagent calls. |
 | [drive-the-workflow](cookbook/drive-the-workflow.md) | Use the `workflow-runner` meta-skill to detect the current phase, check its gate, and delegate to the right phase-specific skill on any bootstrapped project. |
+| [use-the-npm-wrapper](cookbook/use-the-npm-wrapper.md) | Bootstrap a project via `npm create ai-engineering-system@latest` instead of cloning the system repo. Covers the wrapper's system-resolution rules and env vars. |
 
 ## contributing recipes
 

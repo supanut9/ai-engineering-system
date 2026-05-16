@@ -129,6 +129,7 @@ nav:
     - Write a Plan File: cookbook/write-a-plan-file.md
     - Add a Custom Claude Skill: cookbook/add-a-custom-claude-skill.md
     - Drive the Workflow (runner skill): cookbook/drive-the-workflow.md
+    - Bootstrap with the npm wrapper: cookbook/use-the-npm-wrapper.md
     - Upgrade System Version: cookbook/upgrade-system-version.md
     - Split Work into Parallel Lanes: cookbook/split-work-into-parallel-lanes.md
   - Examples: examples.md

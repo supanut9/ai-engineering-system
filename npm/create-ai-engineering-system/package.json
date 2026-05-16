@@ -1,0 +1,37 @@
+{
+  "name": "create-ai-engineering-system",
+  "version": "0.1.0",
+  "description": "Bootstrap a new project from the AI Engineering System via `npm create ai-engineering-system@latest`.",
+  "type": "module",
+  "bin": {
+    "create-ai-engineering-system": "bin/create.mjs"
+  },
+  "files": [
+    "bin",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/supanut9/ai-engineering-system",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supanut9/ai-engineering-system.git",
+    "directory": "npm/create-ai-engineering-system"
+  },
+  "bugs": {
+    "url": "https://github.com/supanut9/ai-engineering-system/issues"
+  },
+  "keywords": [
+    "ai-engineering",
+    "bootstrap",
+    "scaffolding",
+    "claude",
+    "codex",
+    "create"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
