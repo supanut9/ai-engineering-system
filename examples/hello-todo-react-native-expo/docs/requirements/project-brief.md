@@ -59,6 +59,6 @@ and useful as a model.
 
 ## time and scope cap
 
-v0.1.0 ships in one focused day for a single developer. Scope is fixed: two screens (list
-+ modal add), one entity, AsyncStorage persistence, no auth, no network. Any additions are
-deferred to v0.2.0 or later.
+v0.1.0 ships in one focused day for a single developer. Scope is fixed: two screens
+(list and a modal add), one entity, AsyncStorage persistence, no auth, no network. Any
+additions are deferred to v0.2.0 or later.
