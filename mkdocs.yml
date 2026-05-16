@@ -128,6 +128,7 @@ nav:
     - Add an ADR: cookbook/add-an-adr.md
     - Write a Plan File: cookbook/write-a-plan-file.md
     - Add a Custom Claude Skill: cookbook/add-a-custom-claude-skill.md
+    - Drive the Workflow (runner skill): cookbook/drive-the-workflow.md
     - Upgrade System Version: cookbook/upgrade-system-version.md
     - Split Work into Parallel Lanes: cookbook/split-work-into-parallel-lanes.md
   - Examples: examples.md

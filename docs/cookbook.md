@@ -16,6 +16,7 @@ Each recipe is a self-contained walkthrough with exact commands, expected output
 | [run-the-hello-todo-example](cookbook/run-the-hello-todo-example.md) | Set up and run the reference example locally; walk through each Phase 0–8 artifact directory to understand the full workflow shape. |
 | [bootstrap-a-fastapi-service](cookbook/bootstrap-a-fastapi-service.md) | Bootstrap a FastAPI service with the `--stack fastapi-layered` profile, confirm all four quality gates (pytest, ruff, mypy, uvicorn), and understand the generated layout. |
 | [split-work-into-parallel-lanes](cookbook/split-work-into-parallel-lanes.md) | Apply the parallel-lanes-and-waves pattern from `workflow/subagent-contract.md` to decompose a real feature across multiple Claude Code subagent calls. |
+| [drive-the-workflow](cookbook/drive-the-workflow.md) | Use the `workflow-runner` meta-skill to detect the current phase, check its gate, and delegate to the right phase-specific skill on any bootstrapped project. |
 
 ## contributing recipes
 
