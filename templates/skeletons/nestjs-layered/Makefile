@@ -1,4 +1,4 @@
-.PHONY: setup run test lint fmt
+.PHONY: setup run test lint fmt build
 
 setup:
 	npm install
@@ -11,6 +11,9 @@ test:
 
 lint:
 	npx tsc --noEmit
+
+build:
+	npm run build
 
 fmt:
 	# format: add prettier in Phase 3 tooling
