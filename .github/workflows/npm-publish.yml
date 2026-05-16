@@ -1,0 +1,88 @@
+# Action versions verified 2026-05-17. Renovate/Dependabot will keep them current.
+# Publishes the `create-ai-engineering-system` npm wrapper.
+#
+# Trigger: push a tag matching `create-ai-engineering-system-v*` (manual).
+#   git tag create-ai-engineering-system-v0.2.0
+#   git push origin create-ai-engineering-system-v0.2.0
+#
+# The tag's version (after the `v`) must match package.json in
+# npm/create-ai-engineering-system/. The workflow refuses to publish on
+# mismatch.
+#
+# Required repo secret: NPM_TOKEN — an npm automation token with publish
+# rights for the `create-ai-engineering-system` package.
+
+name: Publish create-ai-engineering-system
+
+on:
+  push:
+    tags:
+      - "create-ai-engineering-system-v*"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Run npm publish --dry-run only (no upload)"
+        required: false
+        default: "true"
+        type: string
+
+permissions:
+  contents: read
+  id-token: write  # required for npm provenance via OIDC
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: npm/create-ai-engineering-system
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Resolve target version
+        id: version
+        working-directory: ${{ github.workspace }}
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            tag="${GITHUB_REF_NAME}"
+            tag_version="${tag#create-ai-engineering-system-v}"
+            echo "source=tag" >> "${GITHUB_OUTPUT}"
+            echo "tag_version=${tag_version}" >> "${GITHUB_OUTPUT}"
+          else
+            echo "source=manual" >> "${GITHUB_OUTPUT}"
+            echo "tag_version=" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Verify package.json version matches tag
+        if: steps.version.outputs.source == 'tag'
+        run: |
+          pkg_version=$(node -p "require('./package.json').version")
+          tag_version="${{ steps.version.outputs.tag_version }}"
+          if [[ "${pkg_version}" != "${tag_version}" ]]; then
+            echo "::error::package.json version (${pkg_version}) does not match tag version (${tag_version})"
+            exit 1
+          fi
+          echo "version match: ${pkg_version}"
+
+      - name: Smoke-test the wrapper
+        run: |
+          node --check bin/create.mjs
+          node bin/create.mjs --help > /dev/null
+
+      - name: Publish (dry run)
+        if: steps.version.outputs.source == 'manual'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public --provenance --dry-run
+
+      - name: Publish
+        if: steps.version.outputs.source == 'tag'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public --provenance

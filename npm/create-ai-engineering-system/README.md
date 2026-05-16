@@ -53,6 +53,23 @@ The `--` separator is required by `npm create` — every flag after it is forwar
 
 The wrapper itself does nothing except locate the system source, verify bash, and exec `init-project.sh`. All bootstrap logic lives in the system repo.
 
+## releasing
+
+The wrapper is versioned independently of the system. To publish a new version:
+
+1. Bump `version` in `package.json`.
+2. Open a PR, merge to main.
+3. Create and push a tag matching `create-ai-engineering-system-v<version>`:
+
+   ```bash
+   git tag create-ai-engineering-system-v0.2.0
+   git push origin create-ai-engineering-system-v0.2.0
+   ```
+
+4. The `Publish create-ai-engineering-system` GH Actions workflow runs on tag push, verifies the tag matches `package.json`, and publishes to npm with provenance.
+
+A `workflow_dispatch` button on the same workflow runs `npm publish --dry-run` for sanity-checking without uploading. The repo must have an `NPM_TOKEN` secret with publish rights.
+
 ## license
 
 MIT — see the [system repo LICENSE](https://github.com/supanut9/ai-engineering-system/blob/main/LICENSE).
