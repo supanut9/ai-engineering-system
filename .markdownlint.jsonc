@@ -57,5 +57,12 @@
   // rule (added in markdownlint v0.40 / markdownlint-cli2-action v23) flags
   // that inconsistency repo-wide. Stylistic only; revisit during a dedicated
   // table-prose-pass.
-  "MD060": false
+  "MD060": false,
+
+  // MD012 — no-multiple-blanks: disabled. release-please's auto-generated
+  // CHANGELOG inserts two blank lines after each version header, which
+  // markdownlint v0.40 flags. Since the format is out of our control and
+  // identical extra spacing appears in some example CHANGELOGs, opt out
+  // globally rather than fight the release tooling on every release.
+  "MD012": false
 }
