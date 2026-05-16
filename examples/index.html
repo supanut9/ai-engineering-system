@@ -2889,6 +2889,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hello-todo-rust-rust-axum-hexagonal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hello-todo-rust (Rust + Axum + hexagonal)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hello-todo-react-native-expo-typescript-expo-asyncstorage" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2905,10 +2916,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#comparing-the-five-backend-stacks" class="md-nav__link">
+  <a href="#comparing-the-six-backend-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        comparing the five backend stacks
+        comparing the six backend stacks
       
     </span>
   </a>
@@ -3324,6 +3335,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hello-todo-rust-rust-axum-hexagonal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hello-todo-rust (Rust + Axum + hexagonal)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hello-todo-react-native-expo-typescript-expo-asyncstorage" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3340,10 +3362,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#comparing-the-five-backend-stacks" class="md-nav__link">
+  <a href="#comparing-the-six-backend-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        comparing the five backend stacks
+        comparing the six backend stacks
       
     </span>
   </a>
@@ -3460,6 +3482,13 @@
 <p><strong>What this example teaches:</strong> how Fastify's typed plugin architecture composes a hexagonal core; how Zod doubles as both request validation and response serialisation; the trade-off between Fastify's lightweight DX and a heavier framework like NestJS.</p>
 <p><strong>Path:</strong> <code>examples/hello-todo-fastify/</code></p>
 <hr />
+<h3 id="hello-todo-rust-rust-axum-hexagonal"><code>hello-todo-rust</code> (Rust + Axum + hexagonal)<a class="headerlink" href="#hello-todo-rust-rust-axum-hexagonal" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> available since v0.6.0.</p>
+<p><strong>Stack:</strong> Rust edition 2024 (MSRV 1.85), Axum 0.8, Tokio 1.45, tower-http 0.6, hexagonal architecture, in-memory storage via <code>tokio::sync::RwLock</code>, structured logging via <code>tracing</code>.</p>
+<p><strong>Highlights:</strong> the strongest type-system enforcement of the hexagonal boundary of any example. The <code>TodoRepository</code> outbound port is an <code>async_trait</code> returning a concrete domain <code>Error</code> enum, so handler-side error mapping is exhaustive at compile time. PATCH <code>due_at</code> three-state (absent / null / value) is parsed via <code>serde_json::Map&lt;String, Value&gt;</code> mirroring the Go example's pattern; <code>Uuid::new_v4().simple()</code> replaces <code>crypto/rand</code> for ids.</p>
+<p><strong>What this example teaches:</strong> how hexagonal architecture works in Rust specifically; when a port trait + <code>Arc&lt;dyn Trait&gt;</code> boundary pays for itself; how to wire graceful shutdown with <code>tokio::signal::ctrl_c</code> + <code>axum::serve</code>; how <code>cargo clippy -D warnings</code> + <code>cargo fmt --check</code> substitute for <code>gofmt</code> + <code>go vet</code>.</p>
+<p><strong>Path:</strong> <code>examples/hello-todo-rust/</code></p>
+<hr />
 <h3 id="hello-todo-react-native-expo-typescript-expo-asyncstorage"><code>hello-todo-react-native-expo</code> (TypeScript + Expo + AsyncStorage)<a class="headerlink" href="#hello-todo-react-native-expo-typescript-expo-asyncstorage" title="Permanent link">&para;</a></h3>
 <p><strong>Status:</strong> available since v0.5.0.</p>
 <p><strong>Stack:</strong> Expo SDK 55, Expo Router, React Native 0.85, React 19.2, TypeScript 6.0+, AsyncStorage for offline persistence, Jest with <code>jest-expo</code> preset + <code>@testing-library/react-native</code>.</p>
@@ -3467,7 +3496,7 @@
 <p><strong>What this example teaches:</strong> how Expo Router (file-system routing) shapes a mobile app the same way Next.js App Router shapes a web one; how load-on-mount + save-on-mutate persistence behaves for a small offline-first app; how the "Phase 7 deployment plan" looks when the production target is App Store Connect / Play Console / EAS Update OTAs instead of a Kubernetes cluster.</p>
 <p><strong>Path:</strong> <code>examples/hello-todo-react-native-expo/</code></p>
 <hr />
-<h2 id="comparing-the-five-backend-stacks">comparing the five backend stacks<a class="headerlink" href="#comparing-the-five-backend-stacks" title="Permanent link">&para;</a></h2>
+<h2 id="comparing-the-six-backend-stacks">comparing the six backend stacks<a class="headerlink" href="#comparing-the-six-backend-stacks" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3477,6 +3506,7 @@
 <th>NestJS</th>
 <th>Next.js</th>
 <th>Fastify</th>
+<th>Rust</th>
 </tr>
 </thead>
 <tbody>
@@ -3487,6 +3517,7 @@
 <td>layered (modules + DI)</td>
 <td>layered (App Router + services)</td>
 <td>hexagonal</td>
+<td>hexagonal</td>
 </tr>
 <tr>
 <td>Validation lives in</td>
@@ -3495,6 +3526,7 @@
 <td>class-validator on DTOs</td>
 <td>hand-rolled validators in <code>types/</code></td>
 <td>Zod schemas at the boundary + service rules</td>
+<td>service + <code>serde</code> deserialisation rejection at boundary</td>
 </tr>
 <tr>
 <td>Error mapping</td>
@@ -3503,6 +3535,7 @@
 <td>global exception filter</td>
 <td>route handler maps service errors</td>
 <td><code>setErrorHandler</code> on Fastify instance</td>
+<td><code>AppError</code> impl <code>IntoResponse</code> + exhaustive <code>match</code></td>
 </tr>
 <tr>
 <td>Test harness</td>
@@ -3511,6 +3544,7 @@
 <td><code>@nestjs/testing</code> + supertest</td>
 <td>Vitest + @testing-library/react</td>
 <td>Vitest + <code>fastify.inject()</code></td>
+<td><code>tower::ServiceExt::oneshot</code> + <code>cargo test</code></td>
 </tr>
 <tr>
 <td>Composition root</td>
@@ -3519,6 +3553,7 @@
 <td><code>main.ts</code> + <code>AppModule</code></td>
 <td>App Router (<code>src/app/</code>) — implicit</td>
 <td><code>src/index.ts</code> (3 lines)</td>
+<td><code>src/main.rs</code> + <code>axum::serve</code></td>
 </tr>
 <tr>
 <td>Total code files</td>
@@ -3527,6 +3562,7 @@
 <td>~22</td>
 <td>~19</td>
 <td>~16</td>
+<td>~17</td>
 </tr>
 </tbody>
 </table>
