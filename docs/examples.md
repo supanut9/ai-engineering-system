@@ -2,9 +2,9 @@
 
 Each reference example is a tiny, fully filled-in project that walks all eight workflow phases end-to-end — Phase 0 intake, PRD, specs, architecture, ADR, planning, working code, tests, CI, and runbook. They are the proof-of-correctness for the workflow: a contributor can read any example and see what every artifact looks like when it is actually filled in for a real, if small, service. Nothing in the abstract workflow documentation substitutes for seeing a Phase 3 ADR or a Phase 5 runbook written out against a concrete problem.
 
-## the same product, four stacks
+## the same product, five stacks
 
-All four examples implement the same single-tenant in-memory todo-list HTTP API: six endpoints (`POST /todos`, `GET /todos`, `GET /todos/:id`, `PATCH /todos/:id`, `DELETE /todos/:id`, and `GET /health`), a single `Todo` entity with `id`, `title`, `done`, and `createdAt` fields, and a shared error envelope (`{"error": {"code": "...", "message": "..."}}`). The differences are entirely in how each stack idiom shapes the implementation — folder layout, dependency injection style, validation approach, and test harness.
+All five examples implement the same single-tenant in-memory todo-list HTTP API: six endpoints (`POST /todos`, `GET /todos`, `GET /todos/:id`, `PATCH /todos/:id`, `DELETE /todos/:id`, and `GET /health`), a single `Todo` entity with `id`, `title`, `done`, and `createdAt` fields, and a shared error envelope (`{"error": {"code": "...", "message": "..."}}`). The differences are entirely in how each stack idiom shapes the implementation — folder layout, dependency injection style, validation approach, and test harness.
 
 ## examples
 
@@ -64,16 +64,30 @@ All four examples implement the same single-tenant in-memory todo-list HTTP API:
 
 ---
 
-## comparing the four
+### `hello-todo-fastify` (TypeScript + Fastify + hexagonal)
 
-| | Go | FastAPI | NestJS | Next.js |
-|---|---|---|---|---|
-| Architecture name | hexagonal | layered | layered (via modules + DI) | layered (App Router + services/lib) |
-| Validation lives in | service | Pydantic DTOs at the boundary | class-validator on DTOs | hand-rolled validators in `types/` |
-| Error mapping | handler maps service errors to envelope | global exception handler | global exception filter | route handler maps service errors to envelope |
-| Test harness | `httptest` | `TestClient` (httpx) | `@nestjs/testing` + supertest | Vitest + @testing-library/react |
-| Composition root | `cmd/api/main.go` | `main.py:app` factory | `main.ts` + `AppModule` | App Router (`src/app/`) — no explicit composition root |
-| Total code files | ~14 | ~17 | ~22 | ~19 |
+**Status:** available since v0.4.0.
+
+**Stack:** Fastify 5.8.x, TypeScript 6.0+, Zod 4 via `fastify-type-provider-zod`, pino logging, Vitest 4, hexagonal architecture, in-memory storage.
+
+**Highlights:** the closest TypeScript counterpart to `hello-todo-go` — same `/v1/todos` API shape, same `:8080` port, same error envelope. Validation is split between Zod schemas at the HTTP boundary (structural type checks; Fastify rejects malformed requests with 400) and the core service (business rules like `trim`, length bounds). The composition root in `src/index.ts` wires repo → service → server in three lines. Route integration tests use `fastify.inject()` for in-process exercise (no socket).
+
+**What this example teaches:** how Fastify's typed plugin architecture composes a hexagonal core; how Zod doubles as both request validation and response serialisation; the trade-off between Fastify's lightweight DX and a heavier framework like NestJS.
+
+**Path:** `examples/hello-todo-fastify/`
+
+---
+
+## comparing the five
+
+| | Go | FastAPI | NestJS | Next.js | Fastify |
+|---|---|---|---|---|---|
+| Architecture name | hexagonal | layered | layered (modules + DI) | layered (App Router + services) | hexagonal |
+| Validation lives in | service | Pydantic DTOs at the boundary | class-validator on DTOs | hand-rolled validators in `types/` | Zod schemas at the boundary + service rules |
+| Error mapping | handler maps service errors to envelope | global exception handler | global exception filter | route handler maps service errors | `setErrorHandler` on Fastify instance |
+| Test harness | `httptest` | `TestClient` (httpx) | `@nestjs/testing` + supertest | Vitest + @testing-library/react | Vitest + `fastify.inject()` |
+| Composition root | `cmd/api/main.go` | `main.py:app` factory | `main.ts` + `AppModule` | App Router (`src/app/`) — implicit | `src/index.ts` (3 lines) |
+| Total code files | ~14 | ~17 | ~22 | ~19 | ~16 |
 
 ## running an example
 
@@ -104,7 +118,6 @@ See the [governance](governance.md) page for how to propose a new example via a 
 
 Planned for later releases:
 
-- `hello-todo-fastify` — minimal Fastify hexagonal counterpart; mirrors the Go example more directly than the FastAPI version does.
 - `hello-todo-react-native-expo` — mobile-shaped example with a synced offline-first todo store.
 
 ## see also
