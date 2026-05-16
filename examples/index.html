@@ -2601,10 +2601,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-same-product-five-stacks" class="md-nav__link">
+  <a href="#the-same-product-six-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        the same product, five stacks
+        the same product, six stacks
       
     </span>
   </a>
@@ -2678,16 +2678,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hello-todo-react-native-expo-typescript-expo-asyncstorage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hello-todo-react-native-expo (TypeScript + Expo + AsyncStorage)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#comparing-the-five" class="md-nav__link">
+  <a href="#comparing-the-five-backend-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        comparing the five
+        comparing the five backend stacks
       
     </span>
   </a>
@@ -3025,10 +3036,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-same-product-five-stacks" class="md-nav__link">
+  <a href="#the-same-product-six-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        the same product, five stacks
+        the same product, six stacks
       
     </span>
   </a>
@@ -3102,16 +3113,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hello-todo-react-native-expo-typescript-expo-asyncstorage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        hello-todo-react-native-expo (TypeScript + Expo + AsyncStorage)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#comparing-the-five" class="md-nav__link">
+  <a href="#comparing-the-five-backend-stacks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        comparing the five
+        comparing the five backend stacks
       
     </span>
   </a>
@@ -3189,8 +3211,9 @@
 
 <h1 id="reference-examples">reference examples<a class="headerlink" href="#reference-examples" title="Permanent link">&para;</a></h1>
 <p>Each reference example is a tiny, fully filled-in project that walks all eight workflow phases end-to-end — Phase 0 intake, PRD, specs, architecture, ADR, planning, working code, tests, CI, and runbook. They are the proof-of-correctness for the workflow: a contributor can read any example and see what every artifact looks like when it is actually filled in for a real, if small, service. Nothing in the abstract workflow documentation substitutes for seeing a Phase 3 ADR or a Phase 5 runbook written out against a concrete problem.</p>
-<h2 id="the-same-product-five-stacks">the same product, five stacks<a class="headerlink" href="#the-same-product-five-stacks" title="Permanent link">&para;</a></h2>
-<p>All five examples implement the same single-tenant in-memory todo-list HTTP API: six endpoints (<code>POST /todos</code>, <code>GET /todos</code>, <code>GET /todos/:id</code>, <code>PATCH /todos/:id</code>, <code>DELETE /todos/:id</code>, and <code>GET /health</code>), a single <code>Todo</code> entity with <code>id</code>, <code>title</code>, <code>done</code>, and <code>createdAt</code> fields, and a shared error envelope (<code>{"error": {"code": "...", "message": "..."}}</code>). The differences are entirely in how each stack idiom shapes the implementation — folder layout, dependency injection style, validation approach, and test harness.</p>
+<h2 id="the-same-product-six-stacks">the same product, six stacks<a class="headerlink" href="#the-same-product-six-stacks" title="Permanent link">&para;</a></h2>
+<p>Five of the six examples implement the same single-tenant in-memory todo-list HTTP API: six endpoints (<code>POST /todos</code>, <code>GET /todos</code>, <code>GET /todos/:id</code>, <code>PATCH /todos/:id</code>, <code>DELETE /todos/:id</code>, and <code>GET /health</code>), a single <code>Todo</code> entity with <code>id</code>, <code>title</code>, <code>done</code>, and <code>createdAt</code> fields, and a shared error envelope (<code>{"error": {"code": "...", "message": "..."}}</code>). The differences are entirely in how each stack idiom shapes the implementation — folder layout, dependency injection style, validation approach, and test harness.</p>
+<p>The sixth example — <code>hello-todo-react-native-expo</code> — is <strong>deliberately the odd one out</strong>: a mobile app with no backend, no HTTP API, and offline-first persistence via AsyncStorage. It is the system's reference for how a mobile-shaped project diverges from a server-shaped one (no <code>api-spec.md</code>; a new <code>screens.md</code>; an EAS-based deployment plan).</p>
 <h2 id="examples">examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h2>
 <h3 id="hello-todo-go-go-gin-hexagonal"><code>hello-todo-go</code> (Go + Gin + hexagonal)<a class="headerlink" href="#hello-todo-go-go-gin-hexagonal" title="Permanent link">&para;</a></h3>
 <p><strong>Status:</strong> available since v0.0.1.</p>
@@ -3227,7 +3250,14 @@
 <p><strong>What this example teaches:</strong> how Fastify's typed plugin architecture composes a hexagonal core; how Zod doubles as both request validation and response serialisation; the trade-off between Fastify's lightweight DX and a heavier framework like NestJS.</p>
 <p><strong>Path:</strong> <code>examples/hello-todo-fastify/</code></p>
 <hr />
-<h2 id="comparing-the-five">comparing the five<a class="headerlink" href="#comparing-the-five" title="Permanent link">&para;</a></h2>
+<h3 id="hello-todo-react-native-expo-typescript-expo-asyncstorage"><code>hello-todo-react-native-expo</code> (TypeScript + Expo + AsyncStorage)<a class="headerlink" href="#hello-todo-react-native-expo-typescript-expo-asyncstorage" title="Permanent link">&para;</a></h3>
+<p><strong>Status:</strong> available since v0.5.0.</p>
+<p><strong>Stack:</strong> Expo SDK 55, Expo Router, React Native 0.85, React 19.2, TypeScript 6.0+, AsyncStorage for offline persistence, Jest with <code>jest-expo</code> preset + <code>@testing-library/react-native</code>.</p>
+<p><strong>Highlights:</strong> the system's reference for a <strong>mobile-shaped</strong> project — no backend, no HTTP, no port. Two screens (list + add modal) wire through a single <code>useTodos</code> hook that hydrates from AsyncStorage on mount and writes back on every mutation. The data layer is a thin in-memory <code>Map</code> + serialise-to-AsyncStorage rather than a redux/zustand store, keeping dependencies minimal. Uses <code>Pressable</code> rather than <code>TouchableOpacity</code> to side-step a renderer version-mismatch issue under jest-expo 55.</p>
+<p><strong>What this example teaches:</strong> how Expo Router (file-system routing) shapes a mobile app the same way Next.js App Router shapes a web one; how load-on-mount + save-on-mutate persistence behaves for a small offline-first app; how the "Phase 7 deployment plan" looks when the production target is App Store Connect / Play Console / EAS Update OTAs instead of a Kubernetes cluster.</p>
+<p><strong>Path:</strong> <code>examples/hello-todo-react-native-expo/</code></p>
+<hr />
+<h2 id="comparing-the-five-backend-stacks">comparing the five backend stacks<a class="headerlink" href="#comparing-the-five-backend-stacks" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3309,9 +3339,11 @@
 </ul>
 <p>See the <a href="../governance/">governance</a> page for how to propose a new example via a GitHub issue, and the <a href="../cookbook/">cookbook</a> for stack-specific walkthroughs including an end-to-end guide for running the existing hello-todo examples.</p>
 <h2 id="future-examples">future examples<a class="headerlink" href="#future-examples" title="Permanent link">&para;</a></h2>
-<p>Planned for later releases:</p>
+<p>The current six examples cover the system's core stacks. Future additions will be driven by community demand. Candidates worth considering:</p>
 <ul>
-<li><code>hello-todo-react-native-expo</code> — mobile-shaped example with a synced offline-first todo store.</li>
+<li>A <code>hello-todo-rust-axum</code> Rust counterpart (hexagonal, mirrors <code>hello-todo-go</code>).</li>
+<li>A <code>hello-todo-elixir-phoenix</code> example to demonstrate a non-OO language stack.</li>
+<li>A "todo + Postgres" variant of one of the existing stacks to demonstrate the persistence-adapter shape.</li>
 </ul>
 <h2 id="see-also">see also<a class="headerlink" href="#see-also" title="Permanent link">&para;</a></h2>
 <ul>
