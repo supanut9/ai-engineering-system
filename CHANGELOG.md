@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Releases are managed automatically by [release-please](https://github.com/googleapis/release-please-action). Commits on `main` that follow Conventional Commits drive the next version bump and the entries below; see the contributing guide for the format.
 
+## [0.2.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.1.0...ai-engineering-system-v0.2.0) (2026-05-16)
+
+
+### Features
+
+* **tooling:** add react-native eslint overlay using eslint-config-expo ([a672473](https://github.com/supanut9/ai-engineering-system/commit/a6724730023836342f7d6895faa0d0e95d7354f6))
+
+
+### Bug Fixes
+
+* **ci:** bump CI Go to 1.25.x ([b0a863e](https://github.com/supanut9/ai-engineering-system/commit/b0a863ed357332b59bb0ee8d8d466da33dc09113))
+* **ci:** make markdown + actionlint lints green ([6e71e2f](https://github.com/supanut9/ai-engineering-system/commit/6e71e2fa686cb97df1892ec79b87e839a1e4230b))
+* **ci:** relax markdownlint rules that fight existing prose style ([1f37489](https://github.com/supanut9/ai-engineering-system/commit/1f374894dce57766ec0bf1ce67d671a1b97e68c7))
+* **ci:** use reviewdog/action-actionlint wrapper; tune markdownlint rules ([f217b37](https://github.com/supanut9/ai-engineering-system/commit/f217b373c0c0f562b927be6cdeb40019cf734721))
+* **skeletons:** make node-based stack templates pass selftest ([1f4d5b7](https://github.com/supanut9/ai-engineering-system/commit/1f4d5b7ae7720156b1b9c04a180bf8afd317e858))
+
 ## [0.1.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.0.1...ai-engineering-system-v0.1.0) (2026-05-15)
 
 ### Features
