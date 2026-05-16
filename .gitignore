@@ -30,6 +30,7 @@ coverage/
 
 # Go (used by examples + skeletons during local verification)
 bin/
+!npm/create-ai-engineering-system/bin/
 vendor/
 *.test
 *.out
