@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Releases are managed automatically by [release-please](https://github.com/googleapis/release-please-action). Commits on `main` that follow Conventional Commits drive the next version bump and the entries below; see the contributing guide for the format.
 
+## [0.3.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.2.0...ai-engineering-system-v0.3.0) (2026-05-16)
+
+
+### Features
+
+* **examples:** add hello-todo-nextjs as the Next.js reference project ([3dbe2a1](https://github.com/supanut9/ai-engineering-system/commit/3dbe2a14879824a788f725b2360e5135410c73f8))
+* **skeletons:** bump nestjs-layered to TypeScript 6 + Jest 30 ([3da92ef](https://github.com/supanut9/ai-engineering-system/commit/3da92ef8d2b367532e7203732c9f3010b744711d))
+* **verify-example:** add Next.js stack + advertise hello-todo-nextjs ([0613a0e](https://github.com/supanut9/ai-engineering-system/commit/0613a0e9257b329fb62cd20da00e20e260201f56))
+
 ## [0.2.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.1.0...ai-engineering-system-v0.2.0) (2026-05-16)
 
 
