@@ -60,11 +60,13 @@ Options:
   --help, -h        Print this help and exit
 
 Supported examples:
-  hello-todo-go     Go / Gin hexagonal reference project
+  hello-todo-go        Go / Gin hexagonal reference project
+  hello-todo-nextjs    Next.js / App Router layered reference project
 
 Examples:
   $(basename -- "$0")
   $(basename -- "$0") --example hello-todo-go
+  $(basename -- "$0") --example hello-todo-nextjs
 EOF
 }
 
@@ -258,12 +260,97 @@ verify_go() {
 }
 
 # ============================================================
-# Verify: Node / Next / Nest (placeholder — only hello-todo-go in scope)
+# Verify: Next.js
+# ============================================================
+verify_nextjs() {
+  local dir="$1"
+
+  # --- npm install ---
+  info "[1/5] npm install"
+  (cd "${dir}" && npm install --no-audit --no-fund --silent)
+
+  # --- vitest run ---
+  info "[2/5] make test (vitest run)"
+  (cd "${dir}" && make test)
+
+  # --- eslint . ---
+  info "[3/5] make lint (eslint)"
+  (cd "${dir}" && make lint)
+
+  # --- next build ---
+  info "[4/5] make build (next build)"
+  (cd "${dir}" && make build)
+
+  # --- start production server ---
+  info "[5/5] starting production server (next start)"
+  local port="3100"
+  (cd "${dir}" && PORT="${port}" npx --no -- next start --port "${port}" >/dev/null 2>&1) &
+  API_PID="$!"
+
+  # Wait up to 15 s for the server to become ready (Next start is slower than Go).
+  local deadline=15
+  local elapsed=0
+  local ready=false
+  while (( elapsed < deadline )); do
+    if curl -sf "http://127.0.0.1:${port}/healthz" >/dev/null 2>&1; then
+      ready=true
+      break
+    fi
+    sleep 1
+    (( elapsed += 1 ))
+  done
+
+  if [[ "${ready}" != "true" ]]; then
+    die "verify-example: server did not become ready within ${deadline}s"
+  fi
+  info "[smoke] Server ready on port ${port}"
+
+  local base="http://127.0.0.1:${port}"
+
+  # 1. GET /healthz
+  info "[smoke] GET /healthz"
+  curl -sf "${base}/healthz" >/dev/null
+
+  # 2. POST /api/todos — capture the id for subsequent requests
+  info "[smoke] POST /api/todos"
+  local create_resp todo_id
+  create_resp="$(curl -sf -X POST "${base}/api/todos" \
+    -H "Content-Type: application/json" \
+    -d '{"title":"verify smoke test"}')"
+  todo_id="$(printf '%s' "${create_resp}" | grep -o '"id":"[^"]*"' | head -1 | cut -d'"' -f4)"
+  if [[ -z "${todo_id}" ]]; then
+    die "verify-example: POST /api/todos returned no id"
+  fi
+  info "[smoke] Created todo id=${todo_id}"
+
+  # 3. GET /api/todos
+  info "[smoke] GET /api/todos"
+  curl -sf "${base}/api/todos" >/dev/null
+
+  # 4. PATCH /api/todos/{id}
+  info "[smoke] PATCH /api/todos/${todo_id}"
+  curl -sf -X PATCH "${base}/api/todos/${todo_id}" \
+    -H "Content-Type: application/json" \
+    -d '{"completed":true}' >/dev/null
+
+  # 5. DELETE /api/todos/{id}
+  info "[smoke] DELETE /api/todos/${todo_id}"
+  local http_status
+  http_status="$(curl -s -o /dev/null -w "%{http_code}" \
+    -X DELETE "${base}/api/todos/${todo_id}")"
+  if [[ "${http_status}" != "204" ]]; then
+    die "verify-example: DELETE /api/todos/${todo_id} returned ${http_status}, expected 204"
+  fi
+
+  info "[smoke] All endpoints passed"
+}
+
+# ============================================================
+# Verify: Node / Nest (placeholder)
 # ============================================================
 verify_node() {
   local dir="$1"
-  warn "verify-example: stack 'node/nextjs/nestjs' smoke checks are not yet"
-  warn "  implemented (only hello-todo-go / go is in scope for this version)."
+  warn "verify-example: stack 'node/nestjs' smoke checks are not yet implemented."
   warn "  Directory: ${dir}"
   warn "  Skipping."
 }
@@ -274,7 +361,9 @@ verify_node() {
 case "${STACK}" in
   go)
     verify_go "${EXAMPLE_DIR}" ;;
-  nextjs|nestjs|node)
+  nextjs)
+    verify_nextjs "${EXAMPLE_DIR}" ;;
+  nestjs|node)
     verify_node "${EXAMPLE_DIR}" ;;
   *)
     die "verify-example: unrecognised stack '${STACK}' for example '${ARG_EXAMPLE}'" ;;

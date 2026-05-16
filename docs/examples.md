@@ -2,9 +2,9 @@
 
 Each reference example is a tiny, fully filled-in project that walks all eight workflow phases end-to-end — Phase 0 intake, PRD, specs, architecture, ADR, planning, working code, tests, CI, and runbook. They are the proof-of-correctness for the workflow: a contributor can read any example and see what every artifact looks like when it is actually filled in for a real, if small, service. Nothing in the abstract workflow documentation substitutes for seeing a Phase 3 ADR or a Phase 5 runbook written out against a concrete problem.
 
-## the same product, three stacks
+## the same product, four stacks
 
-All three examples implement the same single-tenant in-memory todo-list HTTP API: six endpoints (`POST /todos`, `GET /todos`, `GET /todos/:id`, `PATCH /todos/:id`, `DELETE /todos/:id`, and `GET /health`), a single `Todo` entity with `id`, `title`, `done`, and `createdAt` fields, and a shared error envelope (`{"error": {"code": "...", "message": "..."}}`). The differences are entirely in how each stack idiom shapes the implementation — folder layout, dependency injection style, validation approach, and test harness.
+All four examples implement the same single-tenant in-memory todo-list HTTP API: six endpoints (`POST /todos`, `GET /todos`, `GET /todos/:id`, `PATCH /todos/:id`, `DELETE /todos/:id`, and `GET /health`), a single `Todo` entity with `id`, `title`, `done`, and `createdAt` fields, and a shared error envelope (`{"error": {"code": "...", "message": "..."}}`). The differences are entirely in how each stack idiom shapes the implementation — folder layout, dependency injection style, validation approach, and test harness.
 
 ## examples
 
@@ -50,16 +50,30 @@ All three examples implement the same single-tenant in-memory todo-list HTTP API
 
 ---
 
-## comparing the three
+### `hello-todo-nextjs` (TypeScript + Next.js + App Router + layered)
 
-| | Go | FastAPI | NestJS |
-|---|---|---|---|
-| Architecture name | hexagonal | layered | layered (via modules + DI) |
-| Validation lives in | service | Pydantic DTOs at the boundary | class-validator on DTOs |
-| Error mapping | handler maps service errors to envelope | global exception handler | global exception filter |
-| Test harness | `httptest` | `TestClient` (httpx) | `@nestjs/testing` + supertest |
-| Composition root | `cmd/api/main.go` | `main.py:app` factory | `main.ts` + `AppModule` |
-| Total code files | ~14 | ~17 | ~22 |
+**Status:** available since v0.3.0.
+
+**Stack:** Next.js 16.2.x, React 19.2, TypeScript 6.0+, App Router, in-memory storage, Vitest 4 + @testing-library/react.
+
+**Highlights:** the home page is a Server Component that reads the in-memory repo directly — no HTTP hop on first render. A `"use client"` `TodoList` drives all mutations through `/api/todos` route handlers. The data layer is a `createMemoryRepo()` factory: tests get isolated state, and the running process gets a module-level singleton via `getSingletonRepo()`.
+
+**What this example teaches:** how to compose a Next.js App Router app around a small services/lib layered split; when an RSC reading the repo directly is the right move; how Vitest + @testing-library/react slot into a real Next.js project (avoiding the Jest/Next 16 friction).
+
+**Path:** `examples/hello-todo-nextjs/`
+
+---
+
+## comparing the four
+
+| | Go | FastAPI | NestJS | Next.js |
+|---|---|---|---|---|
+| Architecture name | hexagonal | layered | layered (via modules + DI) | layered (App Router + services/lib) |
+| Validation lives in | service | Pydantic DTOs at the boundary | class-validator on DTOs | hand-rolled validators in `types/` |
+| Error mapping | handler maps service errors to envelope | global exception handler | global exception filter | route handler maps service errors to envelope |
+| Test harness | `httptest` | `TestClient` (httpx) | `@nestjs/testing` + supertest | Vitest + @testing-library/react |
+| Composition root | `cmd/api/main.go` | `main.py:app` factory | `main.ts` + `AppModule` | App Router (`src/app/`) — no explicit composition root |
+| Total code files | ~14 | ~17 | ~22 | ~19 |
 
 ## running an example
 
@@ -90,7 +104,6 @@ See the [governance](governance.md) page for how to propose a new example via a 
 
 Planned for later releases:
 
-- `hello-todo-nextjs` — full-stack Next.js with Server Actions and App Router; demonstrates a frontend-shaped example.
 - `hello-todo-fastify` — minimal Fastify hexagonal counterpart; mirrors the Go example more directly than the FastAPI version does.
 - `hello-todo-react-native-expo` — mobile-shaped example with a synced offline-first todo store.
 
