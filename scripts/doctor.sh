@@ -619,6 +619,145 @@ fi
 echo ""
 
 # ============================================================
+# CHECK 9: Claude skills mirror
+# ============================================================
+echo "Check 9: Claude skills"
+
+# Only check skills when a Claude adapter is present. Codex skills live under
+# .codex/skills/ and follow the same pattern; we check that too when applicable.
+if [[ "${HAS_CLAUDE}" == "true" || "${HAS_CODEX}" == "true" ]]; then
+  # Expected baseline set — these ship in every system release and bootstrap.
+  # workflow-runner is the canonical meta-skill and must be present.
+  _expected_skills=(
+    "workflow-runner"
+    "project-intake"
+    "requirements-prd"
+    "functional-spec"
+    "architecture-design"
+    "implementation-planning"
+    "test-planning"
+    "release-readiness"
+    "pr-review"
+    "adr-write"
+    "changelog-update"
+    "dependency-review"
+  )
+
+  _check_skill_dir() {
+    # _check_skill_dir <label> <skills-dir>
+    local label="$1" skills_dir="$2"
+    if [[ ! -d "${skills_dir}" ]]; then
+      _warn "${label} — skills directory missing"
+      return
+    fi
+    local missing=0 skill
+    for skill in "${_expected_skills[@]}"; do
+      if [[ -f "${skills_dir}/${skill}/SKILL.md" ]]; then
+        :  # present
+      else
+        _warn "${label}/${skill}/SKILL.md — missing (run sync-agent-files.sh)"
+        (( missing++ )) || true
+      fi
+    done
+    if (( missing == 0 )); then
+      _pass "${label} — all ${#_expected_skills[@]} baseline skills present"
+    fi
+  }
+
+  if [[ "${HAS_CLAUDE}" == "true" ]]; then
+    _check_skill_dir ".claude/skills" "${TARGET}/.claude/skills"
+  fi
+  if [[ "${HAS_CODEX}" == "true" ]]; then
+    _check_skill_dir ".codex/skills" "${TARGET}/.codex/skills"
+  fi
+else
+  _infoline "No adapter detected — skill checks skipped"
+fi
+
+echo ""
+
+# ============================================================
+# CHECK 10: Workflow-state consistency
+# ============================================================
+echo "Check 10: Workflow-state consistency"
+
+_state_file="${TARGET}/.ai/workflow/workflow-state.md"
+if [[ ! -f "${_state_file}" ]]; then
+  # Already reported as a FAIL in Check 1.
+  _infoline "workflow-state.md missing — skipped (see Check 1)"
+else
+  # Recognised phase titles (Phase 0..8 — order matters for the sequence check).
+  _valid_phases=(
+    "Project Intake"
+    "Requirements"
+    "Functional Specification"
+    "Architecture"
+    "Implementation Planning"
+    "Implementation"
+    "Testing"
+    "Release Readiness"
+    "Maintenance"
+  )
+
+  # Pull the line under "## Current Phase" header (first non-blank line after it).
+  _current_phase=""
+  _current_phase="$(awk '
+    /^## Current Phase/ { found=1; next }
+    found && NF > 0 { print; exit }
+  ' "${_state_file}" 2>/dev/null || true)"
+
+  if [[ -z "${_current_phase}" ]]; then
+    _fail "workflow-state.md — no Current Phase value found"
+  else
+    # Strip "Phase N:" prefix if present.
+    _phase_name="${_current_phase#Phase [0-9]: }"
+    _phase_name="${_phase_name#Phase [0-9][0-9]: }"
+
+    _phase_known=false
+    for _p in "${_valid_phases[@]}"; do
+      if [[ "${_phase_name}" == "${_p}" ]]; then
+        _phase_known=true
+        break
+      fi
+    done
+
+    if [[ "${_phase_known}" == "true" ]]; then
+      _pass "Current Phase recognised: ${_current_phase}"
+    else
+      _fail "Current Phase unrecognised: '${_current_phase}' (expected one of: ${_valid_phases[*]})"
+    fi
+  fi
+
+  # Completed-phases sequence check: once we see an unchecked item, no later
+  # item should be checked. This catches typical hand-edit mistakes where
+  # someone ticks Testing before Implementation completes.
+  _seen_unchecked=false
+  _out_of_order=false
+  while IFS= read -r line; do
+    if [[ "${line}" == "- [ ] "* ]]; then
+      _seen_unchecked=true
+    elif [[ "${line}" == "- [x] "* ]] || [[ "${line}" == "- [X] "* ]]; then
+      if [[ "${_seen_unchecked}" == "true" ]]; then
+        _out_of_order=true
+        break
+      fi
+    fi
+  done < <(awk '
+    /^## Completed Phases/ { found=1; next }
+    /^## / && found { exit }
+    found { print }
+  ' "${_state_file}" 2>/dev/null)
+
+  if [[ "${_out_of_order}" == "true" ]]; then
+    _warn "Completed Phases ticked out of order — later phase is checked before an earlier one"
+  else
+    _pass "Completed Phases sequence is consistent"
+  fi
+fi
+
+echo ""
+
+# ============================================================
 # Final summary
 # ============================================================
 echo "============================================================"
