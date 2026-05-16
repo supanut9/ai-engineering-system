@@ -1,0 +1,6 @@
+# clippy configuration. Per-lint allow/deny lives in the crate root via
+# `#![warn(clippy::...)]`; this file only sets thresholds clippy reads at
+# scan time.
+
+avoid-breaking-exported-api = false
+msrv = "1.85"

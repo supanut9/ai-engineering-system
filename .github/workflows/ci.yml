@@ -74,3 +74,15 @@ jobs:
           cache: true
       - name: Run selftest for Go stacks
         run: ./scripts/selftest.sh --stacks go-gin-layered,go-gin-clean,go-gin-hexagonal
+
+  selftest-rust:
+    name: Self-test Rust stack
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt,clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: Run selftest for Rust stack
+        run: ./scripts/selftest.sh --stacks rust-axum-hexagonal

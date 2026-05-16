@@ -94,6 +94,8 @@ nav:
     - Go: stacks/go.md
     - NestJS: stacks/nestjs.md
     - Next.js: stacks/nextjs.md
+    - Rust: stacks/rust.md
+    - Axum: stacks/axum.md
     - PostgreSQL: stacks/postgres.md
     - Redis: stacks/redis.md
     - Docker: stacks/docker.md
@@ -112,6 +114,7 @@ nav:
     - NestJS Layered: project-templates/nestjs/nestjs-layered.md
     - Next.js Default: project-templates/nextjs/nextjs-default.md
     - Multi-Service API + Web: project-templates/multi-service/api-and-web.md
+    - Rust Axum Hexagonal: project-templates/rust/axum-hexagonal.md
   - Adapters:
     - Claude Code: claude/CLAUDE.md
     - Codex: codex/AGENTS.md
