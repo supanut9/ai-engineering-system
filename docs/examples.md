@@ -80,6 +80,20 @@ The sixth example — `hello-todo-react-native-expo` — is **deliberately the o
 
 ---
 
+### `hello-todo-rust` (Rust + Axum + hexagonal)
+
+**Status:** available since v0.6.0.
+
+**Stack:** Rust edition 2024 (MSRV 1.85), Axum 0.8, Tokio 1.45, tower-http 0.6, hexagonal architecture, in-memory storage via `tokio::sync::RwLock`, structured logging via `tracing`.
+
+**Highlights:** the strongest type-system enforcement of the hexagonal boundary of any example. The `TodoRepository` outbound port is an `async_trait` returning a concrete domain `Error` enum, so handler-side error mapping is exhaustive at compile time. PATCH `due_at` three-state (absent / null / value) is parsed via `serde_json::Map<String, Value>` mirroring the Go example's pattern; `Uuid::new_v4().simple()` replaces `crypto/rand` for ids.
+
+**What this example teaches:** how hexagonal architecture works in Rust specifically; when a port trait + `Arc<dyn Trait>` boundary pays for itself; how to wire graceful shutdown with `tokio::signal::ctrl_c` + `axum::serve`; how `cargo clippy -D warnings` + `cargo fmt --check` substitute for `gofmt` + `go vet`.
+
+**Path:** `examples/hello-todo-rust/`
+
+---
+
 ### `hello-todo-react-native-expo` (TypeScript + Expo + AsyncStorage)
 
 **Status:** available since v0.5.0.
@@ -94,16 +108,16 @@ The sixth example — `hello-todo-react-native-expo` — is **deliberately the o
 
 ---
 
-## comparing the five backend stacks
+## comparing the six backend stacks
 
-| | Go | FastAPI | NestJS | Next.js | Fastify |
-|---|---|---|---|---|---|
-| Architecture name | hexagonal | layered | layered (modules + DI) | layered (App Router + services) | hexagonal |
-| Validation lives in | service | Pydantic DTOs at the boundary | class-validator on DTOs | hand-rolled validators in `types/` | Zod schemas at the boundary + service rules |
-| Error mapping | handler maps service errors to envelope | global exception handler | global exception filter | route handler maps service errors | `setErrorHandler` on Fastify instance |
-| Test harness | `httptest` | `TestClient` (httpx) | `@nestjs/testing` + supertest | Vitest + @testing-library/react | Vitest + `fastify.inject()` |
-| Composition root | `cmd/api/main.go` | `main.py:app` factory | `main.ts` + `AppModule` | App Router (`src/app/`) — implicit | `src/index.ts` (3 lines) |
-| Total code files | ~14 | ~17 | ~22 | ~19 | ~16 |
+| | Go | FastAPI | NestJS | Next.js | Fastify | Rust |
+|---|---|---|---|---|---|---|
+| Architecture name | hexagonal | layered | layered (modules + DI) | layered (App Router + services) | hexagonal | hexagonal |
+| Validation lives in | service | Pydantic DTOs at the boundary | class-validator on DTOs | hand-rolled validators in `types/` | Zod schemas at the boundary + service rules | service + `serde` deserialisation rejection at boundary |
+| Error mapping | handler maps service errors to envelope | global exception handler | global exception filter | route handler maps service errors | `setErrorHandler` on Fastify instance | `AppError` impl `IntoResponse` + exhaustive `match` |
+| Test harness | `httptest` | `TestClient` (httpx) | `@nestjs/testing` + supertest | Vitest + @testing-library/react | Vitest + `fastify.inject()` | `tower::ServiceExt::oneshot` + `cargo test` |
+| Composition root | `cmd/api/main.go` | `main.py:app` factory | `main.ts` + `AppModule` | App Router (`src/app/`) — implicit | `src/index.ts` (3 lines) | `src/main.rs` + `axum::serve` |
+| Total code files | ~14 | ~17 | ~22 | ~19 | ~16 | ~17 |
 
 ## running an example
 

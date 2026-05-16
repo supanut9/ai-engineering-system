@@ -65,6 +65,7 @@ Supported examples:
   hello-todo-fastify               Fastify / hexagonal reference project (TypeScript)
   hello-todo-nestjs                NestJS / modules + DI reference project
   hello-todo-react-native-expo     Expo / mobile reference project
+  hello-todo-rust                  Rust / Axum hexagonal reference project
 
 Examples:
   $(basename -- "$0")
@@ -73,6 +74,7 @@ Examples:
   $(basename -- "$0") --example hello-todo-fastify
   $(basename -- "$0") --example hello-todo-nestjs
   $(basename -- "$0") --example hello-todo-react-native-expo
+  $(basename -- "$0") --example hello-todo-rust
 EOF
 }
 
@@ -126,6 +128,9 @@ detect_stack() {
   # File-presence heuristics.
   if [[ -f "${dir}/go.mod" ]]; then
     echo "go"; return
+  fi
+  if [[ -f "${dir}/Cargo.toml" ]]; then
+    echo "rust"; return
   fi
   if [[ -f "${dir}/package.json" ]]; then
     if [[ -f "${dir}/next.config.mjs" || -f "${dir}/next.config.js" ]]; then
@@ -555,6 +560,97 @@ verify_react_native() {
 }
 
 # ============================================================
+# Verify: Rust
+# ============================================================
+verify_rust() {
+  local dir="$1"
+
+  # --- cargo fmt --check ---
+  info "[1/5] cargo fmt --all -- --check"
+  (cd "${dir}" && cargo fmt --all -- --check)
+
+  # --- cargo clippy -D warnings ---
+  info "[2/5] cargo clippy --all-targets --all-features -- -D warnings"
+  (cd "${dir}" && cargo clippy --all-targets --all-features -- -D warnings)
+
+  # --- cargo test ---
+  info "[3/5] cargo test --all-features"
+  (cd "${dir}" && cargo test --all-features)
+
+  # --- cargo build --release ---
+  info "[4/5] cargo build --release --bin api"
+  (cd "${dir}" && cargo build --release --bin api)
+
+  # --- start server ---
+  info "[5/5] Starting ./target/release/api"
+  (cd "${dir}" && ./target/release/api) &
+  API_PID="$!"
+
+  # Wait up to 5 s for readiness.
+  local port="8080"
+  local deadline=5
+  local elapsed=0
+  local ready=false
+  while (( elapsed < deadline )); do
+    if curl -sf "http://127.0.0.1:${port}/healthz" >/dev/null 2>&1; then
+      ready=true
+      break
+    fi
+    sleep 1
+    (( elapsed += 1 ))
+  done
+
+  if [[ "${ready}" != "true" ]]; then
+    die "verify-example: server did not become ready within ${deadline}s"
+  fi
+  info "[smoke] Server ready on port ${port}"
+
+  # --- Smoke-test the 6 endpoints ---
+  local base="http://127.0.0.1:${port}"
+
+  # 1. GET /healthz
+  info "[smoke] GET /healthz"
+  curl -sf "${base}/healthz" >/dev/null
+
+  # 2. POST /v1/todos
+  info "[smoke] POST /v1/todos"
+  local create_resp todo_id
+  create_resp="$(curl -sf -X POST "${base}/v1/todos" \
+    -H "Content-Type: application/json" \
+    -d '{"title":"verify smoke test"}')"
+  todo_id="$(printf '%s' "${create_resp}" | grep -o '"id":"[^"]*"' | head -1 | cut -d'"' -f4)"
+  if [[ -z "${todo_id}" ]]; then
+    die "verify-example: POST /v1/todos returned no id"
+  fi
+  info "[smoke] Created todo id=${todo_id}"
+
+  # 3. GET /v1/todos
+  info "[smoke] GET /v1/todos"
+  curl -sf "${base}/v1/todos" >/dev/null
+
+  # 4. GET /v1/todos/{id}
+  info "[smoke] GET /v1/todos/${todo_id}"
+  curl -sf "${base}/v1/todos/${todo_id}" >/dev/null
+
+  # 5. PATCH /v1/todos/{id}
+  info "[smoke] PATCH /v1/todos/${todo_id}"
+  curl -sf -X PATCH "${base}/v1/todos/${todo_id}" \
+    -H "Content-Type: application/json" \
+    -d '{"completed":true}' >/dev/null
+
+  # 6. DELETE /v1/todos/{id}
+  info "[smoke] DELETE /v1/todos/${todo_id}"
+  local http_status
+  http_status="$(curl -s -o /dev/null -w "%{http_code}" \
+    -X DELETE "${base}/v1/todos/${todo_id}")"
+  if [[ "${http_status}" != "204" ]]; then
+    die "verify-example: DELETE /v1/todos/${todo_id} returned ${http_status}, expected 204"
+  fi
+
+  info "[smoke] All 6 endpoints passed"
+}
+
+# ============================================================
 # Verify: Node (generic — placeholder)
 # ============================================================
 verify_node() {
@@ -570,6 +666,8 @@ verify_node() {
 case "${STACK}" in
   go)
     verify_go "${EXAMPLE_DIR}" ;;
+  rust)
+    verify_rust "${EXAMPLE_DIR}" ;;
   nextjs)
     verify_nextjs "${EXAMPLE_DIR}" ;;
   fastify)
