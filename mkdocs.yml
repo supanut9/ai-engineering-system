@@ -111,6 +111,7 @@ nav:
     - Go Gin Hexagonal: project-templates/go/go-gin-hexagonal.md
     - NestJS Layered: project-templates/nestjs/nestjs-layered.md
     - Next.js Default: project-templates/nextjs/nextjs-default.md
+    - Multi-Service API + Web: project-templates/multi-service/api-and-web.md
   - Adapters:
     - Claude Code: claude/CLAUDE.md
     - Codex: codex/AGENTS.md
@@ -130,6 +131,7 @@ nav:
     - Add a Custom Claude Skill: cookbook/add-a-custom-claude-skill.md
     - Drive the Workflow (runner skill): cookbook/drive-the-workflow.md
     - Bootstrap with the npm wrapper: cookbook/use-the-npm-wrapper.md
+    - Bootstrap a Multi-Service Monorepo: cookbook/bootstrap-multi-service.md
     - Upgrade System Version: cookbook/upgrade-system-version.md
     - Split Work into Parallel Lanes: cookbook/split-work-into-parallel-lanes.md
   - Examples: examples.md
