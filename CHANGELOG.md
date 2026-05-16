@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Releases are managed automatically by [release-please](https://github.com/googleapis/release-please-action). Commits on `main` that follow Conventional Commits drive the next version bump and the entries below; see the contributing guide for the format.
 
+## [0.6.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.5.0...ai-engineering-system-v0.6.0) (2026-05-16)
+
+
+### Features
+
+* **ci:** add npm publish workflow for create-ai-engineering-system ([#26](https://github.com/supanut9/ai-engineering-system/issues/26)) ([326900b](https://github.com/supanut9/ai-engineering-system/commit/326900be922b129160a84a2d6ab25997d877d184))
+* **ci:** smoke-test the create-ai-engineering-system wrapper ([#27](https://github.com/supanut9/ai-engineering-system/issues/27)) ([9032d35](https://github.com/supanut9/ai-engineering-system/commit/9032d35b84c781b9b3a485494782c42b053011fd))
+* **doctor:** add skill-mirror + workflow-state consistency checks ([#25](https://github.com/supanut9/ai-engineering-system/issues/25)) ([5b8c1d8](https://github.com/supanut9/ai-engineering-system/commit/5b8c1d8c15e2ac38618aad1e55730effdae88868))
+* **examples:** add hello-todo-rust as the Rust+Axum reference project ([#28](https://github.com/supanut9/ai-engineering-system/issues/28)) ([2d6b85a](https://github.com/supanut9/ai-engineering-system/commit/2d6b85a45457b14010300deca8da743857f8ec02))
+* **npm:** add create-ai-engineering-system wrapper ([#22](https://github.com/supanut9/ai-engineering-system/issues/22)) ([88e5488](https://github.com/supanut9/ai-engineering-system/commit/88e54886b305e88197ba089525c0534b0ec622dd))
+* **skills:** add workflow-runner meta-skill ([#20](https://github.com/supanut9/ai-engineering-system/issues/20)) ([1f11384](https://github.com/supanut9/ai-engineering-system/commit/1f11384d28b4f6d192aa6064ce729353312ccec3))
+* **stack:** add rust-axum-hexagonal stack ([#24](https://github.com/supanut9/ai-engineering-system/issues/24)) ([dac37d3](https://github.com/supanut9/ai-engineering-system/commit/dac37d3d5167d1c8ffb1dc9ec97e1cd69ec2b216))
+* **templates:** add multi-service api-and-web blueprint ([#23](https://github.com/supanut9/ai-engineering-system/issues/23)) ([13c0f8a](https://github.com/supanut9/ai-engineering-system/commit/13c0f8af09f8dcdecc9c03a23781d839747f4ba0))
+
 ## [0.5.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.4.0...ai-engineering-system-v0.5.0) (2026-05-16)
 
 
