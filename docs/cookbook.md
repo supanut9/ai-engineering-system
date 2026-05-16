@@ -18,6 +18,7 @@ Each recipe is a self-contained walkthrough with exact commands, expected output
 | [split-work-into-parallel-lanes](cookbook/split-work-into-parallel-lanes.md) | Apply the parallel-lanes-and-waves pattern from `workflow/subagent-contract.md` to decompose a real feature across multiple Claude Code subagent calls. |
 | [drive-the-workflow](cookbook/drive-the-workflow.md) | Use the `workflow-runner` meta-skill to detect the current phase, check its gate, and delegate to the right phase-specific skill on any bootstrapped project. |
 | [use-the-npm-wrapper](cookbook/use-the-npm-wrapper.md) | Bootstrap a project via `npm create ai-engineering-system@latest` instead of cloning the system repo. Covers the wrapper's system-resolution rules and env vars. |
+| [bootstrap-multi-service](cookbook/bootstrap-multi-service.md) | Compose two single-service stacks under `apps/api` + `apps/web` with a root Makefile, single CI workflow, and umbrella `.ai/workflow/` state. Includes the "do you actually need a monorepo?" decision rule. |
 
 ## contributing recipes
 
