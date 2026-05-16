@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Releases are managed automatically by [release-please](https://github.com/googleapis/release-please-action). Commits on `main` that follow Conventional Commits drive the next version bump and the entries below; see the contributing guide for the format.
 
+## [0.4.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.3.0...ai-engineering-system-v0.4.0) (2026-05-16)
+
+
+### Features
+
+* **examples:** add hello-todo-fastify as the Fastify hexagonal reference ([2fd5b91](https://github.com/supanut9/ai-engineering-system/commit/2fd5b91c1c4f2be4c8f732844cdab6053ba5e654))
+
+
+### Bug Fixes
+
+* **tooling/nestjs:** inline the Node base config + advertise fastify in verify-example ([a5fc5b6](https://github.com/supanut9/ai-engineering-system/commit/a5fc5b6bdb89163e0fd9c29b05843d80fa2821b1))
+
 ## [0.3.0](https://github.com/supanut9/ai-engineering-system/compare/ai-engineering-system-v0.2.0...ai-engineering-system-v0.3.0) (2026-05-16)
 
 
