@@ -50,5 +50,12 @@
   // MD007 — unordered list indentation: 2 spaces.
   "MD007": {
     "indent": 2
-  }
+  },
+
+  // MD060 — table-column-style: disabled. Many existing tables use the
+  // compact `|---|` separator style while data rows use spaced pipes; the
+  // rule (added in markdownlint v0.40 / markdownlint-cli2-action v23) flags
+  // that inconsistency repo-wide. Stylistic only; revisit during a dedicated
+  // table-prose-pass.
+  "MD060": false
 }
