@@ -18,7 +18,7 @@ Axum favours:
 
 Use axum when:
 
-- the language is already Rust (see [`rust.md`](rust.md))
+- the language is already Rust (see `stacks/rust.md`)
 - the service is an HTTP API, gateway, or web app backend
 - middleware composition (auth, tracing, rate limit, retry) is a first-class
   concern

@@ -77,7 +77,7 @@ Avoid Rust as the default choice when:
 
 ## Recommended Frameworks
 
-- HTTP: **axum** (see [`axum.md`](axum.md)) — Tokio-based, layered on `tower`.
+- HTTP: **axum** (see `stacks/axum.md`) — Tokio-based, layered on `tower`.
 - gRPC: `tonic`.
 - Async runtime: `tokio` (multi-threaded for servers; current-thread for
   embedded/CLI).

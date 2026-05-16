@@ -17,8 +17,7 @@ Use this blueprint when:
 - async runtime: Tokio 1.45 (multi-threaded)
 - default database: PostgreSQL via `sqlx` (added when persistence is needed)
 
-See [`stacks/rust.md`](../../stacks/rust.md) and
-[`stacks/axum.md`](../../stacks/axum.md) for the full stack profile.
+See `stacks/rust.md` and `stacks/axum.md` for the full stack profile.
 
 ## Code Architecture
 
